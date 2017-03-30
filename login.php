@@ -25,7 +25,7 @@ if(!empty($_POST)) {
   
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-   <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
+   <!-- test  info over bootstrap =>      http://getbootstrap.com/components/       -->
    
     <!-- css linken -->
     <link rel="stylesheet" href="css/loginStyle.css">

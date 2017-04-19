@@ -13,7 +13,7 @@ include_once ("classes/User.class.php");
     <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
    
-    <!-- css linken
+    <!-- linken css
     <link rel="stylesheet" href="css/.css">
     -->
     <style>

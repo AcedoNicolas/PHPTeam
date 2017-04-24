@@ -1,6 +1,6 @@
 <?php
 include_once ("classes/User.class.php");
-
+session_start();
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,7 +13,7 @@ include_once ("classes/User.class.php");
     <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
    
-    <!-- css linken
+    <!-- linken css
     <link rel="stylesheet" href="css/.css">
     -->
     <style>
@@ -73,8 +73,13 @@ include_once ("classes/User.class.php");
     
     <div class="jumbotron leegstatus">
       <div class="container">
-
-  <h1>Hallo, <?php echo $username; ?></h1>
+          <h1> Hallo,
+          <?php
+          if (isset($_SESSION['fullname'])){
+              echo $_SESSION['fullname'];
+          }
+          ?>
+          </h1>
   <p>Je hebt nog geen pins leuk gevonden, ontdek ze hier !</p>
   <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
         </div>

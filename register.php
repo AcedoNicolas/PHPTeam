@@ -4,15 +4,47 @@ include_once ("classes/User.class.php");
 
 if(!empty($_POST)){
     try{
-        $user = new user();
-        $user->Fullname= $_POST["fullname"];
-        $user->Username = $_POST["username"];
-        $user->Email = $_POST["email"];
-        $user->Password = $_POST["pass"];
-        $user->Save();
 
-        header("Location: loggedin.php");
-        //$succes = "the user has been saved.";
+        $user = new user();
+
+        $fullnameErr = $usernameErr = $emailErr = $passErr = "";
+
+
+        if (empty($_POST["fullname"])) {
+            $fullnameErr = "Full name is required";
+        }
+        else{
+            $user->Fullname= $_POST["fullname"];
+        }
+
+        if (empty($_POST["username"])) {
+            $usernameErr = "username is required";
+        }
+        else {
+            $user->Username = $_POST["username"];
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+        }
+
+        else{
+            $user->Email = $_POST["email"];
+        }
+
+        if(empty($_POST['password'])) {
+            $passErr = "password is required";
+        }
+        else{
+            $user->Password = $_POST["pass"];
+        }
+
+
+        if(empty($fullnameErr || $usernameErr || $emailErr || $passErr)){
+            $user->Save();
+            header("Location: loggedin.php");
+            //$succes = "the user has been saved.";
+        }
     }
     catch (Exception $e){
         $error= $e->getMessage();

@@ -14,9 +14,8 @@ class Login
         }
 
 
-
         if (!empty($_POST['email']) && !empty($_POST['password'])):
-            $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
+            $conn = new PDO("mysql:host=localhost;dbname=imdterest", "root", "");
 
             $records = $conn->prepare('SELECT id,email,password,fullname FROM Users WHERE email = :email');
             $records->bindParam(':email', $_POST['email']);
@@ -37,7 +36,6 @@ class Login
         endif;
 
     }
-
 
 
 }

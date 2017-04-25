@@ -27,7 +27,9 @@ if(!empty($_POST)){
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
         }
-
+        elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email adress";
+        }
         else{
             $user->Email = $_POST["email"];
         }

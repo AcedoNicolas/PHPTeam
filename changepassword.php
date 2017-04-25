@@ -1,19 +1,19 @@
 <?php
 session_start();
-include ("classes/User.class.php");
-if(!empty($_POST)){
-    try{
+include("classes/User.class.php");
+if (!empty($_POST)) {
+    try {
         $user = new user();
         $user->Password = $_POST["password"];
         $user->Change();
 
         header("Location: loggedin.php");
         //$succes = "the user has been saved.";
-    }
-    catch (Exception $e){
-        $error= $e->getMessage();
+    } catch (Exception $e) {
+        $error = $e->getMessage();
     }
 }
+
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -47,8 +47,6 @@ if(!empty($_POST)){
         <form action="" method="post" id="loginFORM">
 
 
-
-
             <label for="password">wachtwoord</label>
             <input type="password" name="password" id="password" class="form-control" placeholder="wachtwoord">
 
@@ -60,16 +58,15 @@ if(!empty($_POST)){
     </div>
 
     <!-- alert boodschap -->
-    <?php if(isset($error)):?>
+    <?php if (isset($error)): ?>
         <div class="alert alert-danger error" role="alert"><?php echo $error; ?></div>
     <?php endif; ?>
 
-    <!-- <?php /*if(isset($succes)):*/?>
-            <div class="succes"><?php /*echo $succes; */?></div>
-        --><?php /*endif; */?>
+    <!-- <?php /*if(isset($succes)):*/ ?>
+            <div class="succes"><?php /*echo $succes; */ ?></div>
+        --><?php /*endif; */ ?>
 
 </div>
-
 
 
 <!-- <footer> hier komen nog links in</footer> -->

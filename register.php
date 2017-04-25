@@ -1,24 +1,8 @@
 <?php
 include_once("classes/User.class.php");
 
-
-<<<<<<< HEAD
 if (!empty($_POST)) {
     try {
-        $user = new user();
-        $user->Fullname = $_POST["fullname"];
-        $user->Username = $_POST["username"];
-        $user->Email = $_POST["email"];
-        $user->Password = $_POST["pass"];
-        $user->Save();
-
-        header("Location: loggedin.php");
-        //$succes = "the user has been saved.";
-    } catch (Exception $e) {
-        $error = $e->getMessage();
-=======
-if(!empty($_POST)){
-    try{
 
         $user = new user();
 
@@ -27,45 +11,39 @@ if(!empty($_POST)){
 
         if (empty($_POST["fullname"])) {
             $fullnameErr = "Full name is required";
-        }
-        else{
-            $user->Fullname= $_POST["fullname"];
+        } else {
+            $user->Fullname = $_POST["fullname"];
         }
 
         if (empty($_POST["username"])) {
             $usernameErr = "username is required";
-        }
-        else {
+        } else {
             $user->Username = $_POST["username"];
         }
 
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
-        }
-        elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email adress";
-        }
-        else{
+        } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email adress";
+        } else {
             $user->Email = $_POST["email"];
         }
 
-        if(empty($_POST['password'])) {
+        if (empty($_POST['password'])) {
             $passErr = "password is required";
-        }
-        else{
+        } else {
             $user->Password = $_POST["pass"];
         }
 
 
-        if(empty($fullnameErr || $usernameErr || $emailErr || $passErr)){
+        if (empty($fullnameErr || $usernameErr || $emailErr || $passErr)) {
             $user->Save();
             header("Location: loggedin.php");
             //$succes = "the user has been saved.";
         }
-    }
-    catch (Exception $e){
-        $error= $e->getMessage();
->>>>>>> origin/master
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+
     }
 }
 ?><!DOCTYPE html>

@@ -18,8 +18,18 @@
       <file leaf-file-name="register.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/register.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+            <state relative-caret-position="708">
+              <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../IMDterest/register.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="99" column="38" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -56,10 +66,10 @@
         <option value="$PROJECT_DIR$/loggedin.php" />
         <option value="$PROJECT_DIR$/changepassword.php" />
         <option value="$PROJECT_DIR$/classes/User.class.php" />
-        <option value="$PROJECT_DIR$/register.php" />
         <option value="$USER_HOME$/Desktop/BadProjectInc/BadProjectInc/classes/quality.class.php" />
         <option value="$USER_HOME$/Desktop/BadProjectInc/BadProjectInc/classes/user.php" />
         <option value="$USER_HOME$/Desktop/BadProjectInc/BadProjectInc/dosomething.php" />
+        <option value="$PROJECT_DIR$/register.php" />
       </list>
     </option>
   </component>
@@ -227,12 +237,12 @@
       <workItem from="1492622722850" duration="2025000" />
       <workItem from="1493032175870" duration="8918000" />
       <workItem from="1493104584776" duration="57000" />
-      <workItem from="1493108170510" duration="4487000" />
+      <workItem from="1493108170510" duration="5065000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41986000" />
+    <option name="totallyTimeSpent" value="42564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="396" y="0" width="1533" height="1038" extended-state="0" />
@@ -613,14 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../IMDterest/register.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="51" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/BadProjectInc/BadProjectInc/classes/quality.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -655,10 +657,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../IMDterest/register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="99" column="38" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="708">
+          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
           <folding />
         </state>
       </provider>

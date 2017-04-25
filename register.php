@@ -87,16 +87,23 @@ if(!empty($_POST)){
               
                <label for="fullname">Jouw naam</label>
                <input type="text" id="fullname" name="fullname" class="form-control" placeholder="volledige naam">
-               
-               <label for="username">username</label>
+                <?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?>
+
+
+                <label for="username">username</label>
                <input type="text" id="username" name="username" class="form-control" placeholder="username">
-               
+                <?php if(!empty($usernameErr)){ echo $usernameErr;} ?>
+
                 <label for="email">email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="email">
-                
+                <?php if(!empty($emailErr)){ echo $emailErr;}; ?>
+
+
                 <label for="pass">wachtwoord</label>
                 <input type="password" name="pass" id="pass" class="form-control" placeholder="wachtwoord">
-                
+                <?php if(!empty($passErr)){ echo $passErr;} ?>
+
+
                 <button class="btn btn-default">inschrijven</button>
                 <p>log je <a href="login.php">hier</a> aan</p>
             </form>

@@ -2,6 +2,33 @@
 include_once ("classes/User.class.php");
 
 
+
+
+// deze pagina niet meer gebruiken, alles staat nu in login.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(!empty($_POST)){
     try{
 
@@ -84,20 +111,27 @@ if(!empty($_POST)){
             <form action="" method="post" id="loginFORM">
 
                 <label for="fullname">Jouw naam</label>
+                <p class="MsgError"><?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?></p>
                 <input type="text" id="fullname" name="fullname" class="form-control" placeholder="volledige naam">
-                <?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?>
+
 
                 <label for="username">username</label>
+                <p class="MsgError"><?php if(!empty($usernameErr)){ echo $usernameErr;} ?></p>
+
                 <input type="text" id="username" name="username" class="form-control" placeholder="username">
-                <?php if(!empty($usernameErr)){ echo $usernameErr;} ?>
+
 
                 <label for="email">email</label>
+                <p class="MsgError"><?php if(!empty($emailErr)){ echo $emailErr;}; ?></p>
+
                 <input type="text" name="email" id="email" class="form-control" placeholder="email">
-                <?php if(!empty($emailErr)){ echo $emailErr;}; ?>
+
 
                 <label for="pass">wachtwoord</label>
+                <p class="MsgError"><?php if(!empty($passErr)){ echo $passErr;} ?></p>
+
                 <input type="password" name="pass" id="pass" class="form-control" placeholder="wachtwoord">
-                <?php if(!empty($passErr)){ echo $passErr;} ?>
+
 
                 <button class="btn btn-default">inschrijven</button>
                 <p>log je <a href="login.php">hier</a> aan</p>

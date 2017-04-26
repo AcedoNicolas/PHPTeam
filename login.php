@@ -1,18 +1,69 @@
 <?php
 //session_start();
 include "classes/Login.class.php";
+include_once ("classes/User.class.php");
 
-if(!empty($_POST)) {
+
+if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     try {
         $login = new login();
         $login->Email = $_POST["email"];
         $login->Password = $_POST["password"];
         $login->Trylogin();
+
     } catch (Exception $e) {
+        echo "error button";
         $error = $e->getMessage();
     }
 }
+else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
 
+    try{
+        $user = new user();
+        $fullnameErr = $usernameErr = $emailErr = $passErr = "";
+        if (empty($_POST["fullname"])) {
+            $fullnameErr = "Full name is required";
+        }
+        else{
+            $user->Fullname= $_POST["fullname"];
+        }
+
+        if (empty($_POST["username"])) {
+            $usernameErr = "username is required";
+        }
+        else {
+            $user->Username = $_POST["username"];
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+        }
+
+        else{
+            $user->Email = $_POST["email"];
+        }
+
+        if(empty($_POST['pass'])) {
+            $passErr = "password is required";
+        }
+        else{
+            $user->Password = $_POST["pass"];
+        }
+
+
+        if(empty($fullnameErr || $usernameErr || $emailErr || $passErr)){
+            $user->Save();
+            header("Location: loggedin.php");
+            //$succes = "the user has been saved.";
+        }
+        echo "pis";
+    }
+    catch (Exception $e){
+        $error= $e->getMessage();
+    }
+    echo "registerknop geklikt";
+
+}
 
 
 
@@ -31,6 +82,23 @@ if(!empty($_POST)) {
     <!-- css linken -->
     <link rel="stylesheet" href="css/loginStyle.css">
 
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#RegisterForm").hide();
+            $("#BtnToRegister").click(function(){
+                $("#LoginForm").hide();
+                $("#RegisterForm").show();
+            });
+            $("#BtnToLogin").click(function(){
+                $("#RegisterForm").hide();
+                $("#LoginForm").show();
+
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -46,7 +114,7 @@ if(!empty($_POST)) {
             <h1>Welkom bij IMDterest</h1>
             <p>De ideeëncatalogus voor creative mensen </p>
             
-            <form action="" method="post" id="loginFORM">
+            <form action="" method="post" id="LoginForm">
               
                
                 <label for="email">email</label>
@@ -55,9 +123,38 @@ if(!empty($_POST)) {
                 <label for="password">wachtwoord</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="wachtwoord">
                 
-                <button class="btn btn-default">log in</button>
-                <p>Schrijf je <a href="register.php">hier</a> in</p>
+                <button class="btn btn-default" id="BtnLogin" name="BtnLogin">log in</button>
+                <p>Schrijf je <a href="#" id="BtnToRegister">hier</a> in</p>
 
+            </form>
+
+            <form action="" method="post" id="RegisterForm">
+
+                <label for="fullname">Jouw naam</label>
+                <p class="MsgError"><?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?></p>
+                <input type="text" id="fullname" name="fullname" class="form-control" placeholder="volledige naam">
+
+
+                <label for="username">username</label>
+                <p class="MsgError"><?php if(!empty($usernameErr)){ echo $usernameErr;} ?></p>
+
+                <input type="text" id="username" name="username" class="form-control" placeholder="username">
+
+
+                <label for="email">email</label>
+                <p class="MsgError"><?php if(!empty($emailErr)){ echo $emailErr;}; ?></p>
+
+                <input type="text" name="email" id="email" class="form-control" placeholder="email">
+
+
+                <label for="pass">wachtwoord</label>
+                <p class="MsgError"><?php if(!empty($passErr)){ echo $passErr;} ?></p>
+
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="wachtwoord">
+
+
+                <button class="btn btn-default" id="BtnRegister" name="BtnRegister">inschrijven</button>
+                <p>log je <a href="#" id="BtnToLogin" >hier</a> aan</p>
             </form>
 
         </div>
@@ -67,9 +164,6 @@ if(!empty($_POST)) {
             <div class="alert alert-danger error" role="alert"><?php echo $error; ?></div>
         <?php endif; ?>
 
-       <!-- <?php /*if(isset($succes)):*/?>
-            <div class="succes"><?php /*echo $succes; */?></div>
-        --><?php /*endif; */?>
 
     </div>
     

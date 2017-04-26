@@ -38,7 +38,10 @@
             border-radius:8px 0 0 8px;
 
         }
-        #loginFORM{
+        #LoginForm{
+            padding: 10px 50px 0px 50px;
+        }
+        #RegisterForm{
             padding: 10px 50px 0px 50px;
         }
    
@@ -49,7 +52,7 @@
             margin-top: 5%;
         }
         .background-image{
-           background-repeat:no-repeat;
+            background-repeat:no-repeat;
             background-position: center;
             background-position: top;
             background-image:url(../images/achtergrondfoto.png);
@@ -72,3 +75,7 @@
             from{background-position: top;}
             to{background-position: bottom;}
         }*/
+        .MsgError {
+            color: red;
+
+        }

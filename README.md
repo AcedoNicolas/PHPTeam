@@ -1,2 +1,0 @@
-# PHPTeam
-Project Pinterest

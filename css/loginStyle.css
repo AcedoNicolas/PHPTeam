@@ -1,6 +1,4 @@
-body{
-            background-color: black;
-        }
+
         #loginDIV{
             background-color:whitesmoke;
             border-radius:8px;
@@ -51,27 +49,26 @@ body{
             margin-top: 5%;
         }
         .background-image{
-            background-repeat:no-repeat;
+           background-repeat:no-repeat;
             background-position: center;
             background-position: top;
-            background-color: white;
-            background-image:url(../images/achtergrondIMD.jpg);
+            background-image:url(../images/achtergrondfoto.png);
             height: 950px;
             
-            animation-name: scroll;
+           /* animation-name: scroll;
             animation-duration: 50s;
             animation-timing-function: linear;
-            animation-iteration-count: infinite;
+            animation-iteration-count: infinite;*/
             
-            -webkit-filter: blur(5px);
+           /* -webkit-filter: blur(5px);
             -moz-filter: blur(5px);
             -o-filter: blur(5px);
             -ms-filter: blur(5px);
             filter: blur(5px);
-            opacity: 0.7;
+            opacity: 0.7;*/
         }
         
-        @keyframes scroll{
+        /*@keyframes scroll{
             from{background-position: top;}
             to{background-position: bottom;}
-        }
+        }*/

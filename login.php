@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 include "classes/Login.class.php";
 
 if(!empty($_POST)) {
@@ -30,8 +30,8 @@ if(!empty($_POST)) {
    
     <!-- css linken -->
     <link rel="stylesheet" href="css/loginStyle.css">
-    
-    
+
+
 </head>
 <body>
     <div class="background-image"></div>

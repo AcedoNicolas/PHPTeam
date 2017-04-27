@@ -2,16 +2,35 @@
    /* border-radius: 50%;*/
     height: 50px;
 }
+body{
+
+}
 
 .popup{
     background-color:#8c8c8c;
     position: absolute;
-    top: 25%;
-    left: 25%;
+    top: 30%;
+    left: 30%;
     border-radius: 3%;
-
+    color:white;
+    display: none;
+    box-shadow: 10px 10px 100px 5px black;
 
 }
 .popup form {
-    margin: 200px;
+    margin: 150px;
 }
+.popup form ul li {
+    padding-top: 20px;
+    list-style-type: none;
+}
+.popup form h3{
+    position: relative;
+    top:-150px;
+}
+
+
+#TotalContainer{
+    /*filter: blur(3px);*/
+}
+

@@ -1,8 +1,7 @@
 <?php
-        // test test 1 - 2
 include_once ("classes/User.class.php");
 session_start();
-$user = $_SESSION['username'];
+//$user = $_SESSION['username'];
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
 
 
@@ -47,13 +46,14 @@ $user = $_SESSION['username'];
 
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-    <script>
+  <script>
         $(document).ready(function(){
             $("#popup").hide();
 
             $("#BtnAvatar").click(function(){
                 $("#popup").show();
+                $("#TotalContainer").css({"filter": "blur(3px)"});
+
             });
             // if klik close, dan
             $("#opslaan").click(function(){
@@ -61,10 +61,6 @@ $user = $_SESSION['username'];
             });
         });
     </script>
-
-
-
-
 
     <style>
         .imdlogo{
@@ -79,7 +75,7 @@ $user = $_SESSION['username'];
     
 </head>
 <body>
-    
+    <div id="TotalContainer">
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -113,7 +109,7 @@ $user = $_SESSION['username'];
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-              <li><a href="?link=1" id="BtnAvatar" name="BtnAvatar">profielfoto aanpassen</a></li>
+              <li><a href="#" id="BtnAvatar" name="BtnAvatar">profielfoto aanpassen</a></li>
             <li><a href="?link=2">Wijzig wachtwoord</a></li>
 
               <li><a href="logout.php">Log out</a></li>
@@ -142,16 +138,15 @@ $user = $_SESSION['username'];
   <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
         </div>
 </div>
-
+    </div>
     <!-- change profielfoto -->
     <div class="popup" id="popup">
         <form action="" method="post">
-
-            <label for="avatar"> Upload hier je foto</label>
-            <input type="file" name="avatar">
-
-            <button id="opslaan" class="btn btn-primary">opslaan</button>
-
+            <ul>
+                <li><h3>Upload hier je foto</h3></li>
+                <li> <input type="file" name="avatar"></li>
+                <li> <input type="submit" id="opslaan" class="btn btn-primary" href="#" value="Opslaan"></li>
+            </ul>
         </form>
     </div>
 

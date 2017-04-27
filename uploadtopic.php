@@ -35,6 +35,19 @@ if (isset($_POST['upload'])) {
     <title>Document</title>
 </head>
 <body>
+<?php
+$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+$records = $conn->prepare('SELECT * FROM images');
+$records->execute();
+while($row = $records->fetch(PDO::FETCH_ASSOC) ){
+    echo "<div id='img_div'>";
+        echo "<img src='images/Posts/".$row['image']."'>";
+        echo "<p>".$row['text']."</p>";
+            echo "</div>";
+}
+
+
+?>
 
 <form action="" method="post" id="LoginForm" enctype='multipart/form-data'>
 

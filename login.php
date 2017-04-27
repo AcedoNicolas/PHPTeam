@@ -12,7 +12,6 @@ if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
         $login->Trylogin();
 
     } catch (Exception $e) {
-        echo "error button";
         $error = $e->getMessage();
     }
 }
@@ -56,12 +55,10 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
             header("Location: loggedin.php");
             //$succes = "the user has been saved.";
         }
-        echo "pis";
     }
     catch (Exception $e){
         $error= $e->getMessage();
     }
-    echo "registerknop geklikt";
 
 }
 

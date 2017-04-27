@@ -1,6 +1,21 @@
 <?php
 include_once ("classes/User.class.php");
 session_start();
+// nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
+
+
+// bekijken of er al een sessie bestaat
+
+// if sessie bestaat
+        // bekijk of het id, pass of gegevens kloppen (geen idee welk)
+
+
+//if sessie niet bestaat
+    // redirect naar login.php
+
+
+
+
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -15,9 +30,9 @@ session_start();
     <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
    
-    <!-- linken css
-    <link rel="stylesheet" href="css/.css">
-    -->
+    <!-- linken css-->
+    <link rel="stylesheet" href="css/style.css">
+
     <style>
         .imdlogo{
             width: 15%;
@@ -55,8 +70,9 @@ session_start();
         </div>
         <button type="submit" class="btn btn-default">Zoek</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
 
+      <ul class="nav navbar-nav navbar-right">
+          <li> <img src="images/avatar2.jpg" alt="avatar foto" id="avatar"></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn account <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -64,11 +80,14 @@ session_start();
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
+              <li><a href="#">profielfoto aanpassen</a></li>
             <li><a href="changepassword.php">Wijzig wachtwoord</a></li>
+
               <li><a href="logout.php">Log out</a></li>
           </ul>
         </li>
       </ul>
+
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

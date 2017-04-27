@@ -1,4 +1,5 @@
 <?php
+        // test test 1 - 2
 include_once ("classes/User.class.php");
 session_start();
 $user = $_SESSION['username'];
@@ -15,8 +16,17 @@ $user = $_SESSION['username'];
     // redirect naar login.php
 
 
+ /*if (isset($_GET['link'])) {
+     $link = $_GET['link'];
 
+     if ($link == '1') {
+         echo "link geklikt ";
+     }
+     if ($link == '2') {
+         echo 'paswoord aanpassen';
 
+     }
+ }*/
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -33,6 +43,28 @@ $user = $_SESSION['username'];
    
     <!-- linken css-->
     <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#popup").hide();
+
+            $("#BtnAvatar").click(function(){
+                $("#popup").show();
+            });
+            // if klik close, dan
+            $("#opslaan").click(function(){
+                $("#popup").hide();
+            });
+        });
+    </script>
+
+
+
+
 
     <style>
         .imdlogo{
@@ -81,8 +113,8 @@ $user = $_SESSION['username'];
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-              <li><a href="#">profielfoto aanpassen</a></li>
-            <li><a href="changepassword.php">Wijzig wachtwoord</a></li>
+              <li><a href="?link=1" id="BtnAvatar" name="BtnAvatar">profielfoto aanpassen</a></li>
+            <li><a href="?link=2">Wijzig wachtwoord</a></li>
 
               <li><a href="logout.php">Log out</a></li>
           </ul>
@@ -110,7 +142,21 @@ $user = $_SESSION['username'];
   <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
         </div>
 </div>
-    
+
+    <!-- change profielfoto -->
+    <div class="popup" id="popup">
+        <form action="" method="post">
+
+            <label for="avatar"> Upload hier je foto</label>
+            <input type="file" name="avatar">
+
+            <button id="opslaan" class="btn btn-primary">opslaan</button>
+
+        </form>
+    </div>
+
+
+
     <!-- <footer> hier komen nog links in</footer> -->
 </body>
 </html>

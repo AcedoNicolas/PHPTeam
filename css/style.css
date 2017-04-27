@@ -1,5 +1,17 @@
 #avatar{
    /* border-radius: 50%;*/
     height: 50px;
+}
 
+.popup{
+    background-color:#8c8c8c;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    border-radius: 3%;
+
+
+}
+.popup form {
+    margin: 200px;
 }

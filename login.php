@@ -85,7 +85,8 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
 
     <script>
         $(document).ready(function(){
-            $("#RegisterForm").hide();
+           // $("#RegisterForm").hide();
+
             $("#BtnToRegister").click(function(){
                 $("#LoginForm").hide();
                 $("#RegisterForm").show();

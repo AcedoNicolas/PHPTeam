@@ -2,6 +2,7 @@
 //session_start();
 include "classes/Login.class.php";
 include_once ("classes/User.class.php");
+$user = $_SESSION['username'];
 
 
 if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {

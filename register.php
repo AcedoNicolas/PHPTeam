@@ -1,34 +1,6 @@
 <?php
 include_once ("classes/User.class.php");
 
-
-
-
-// deze pagina niet meer gebruiken, alles staat nu in login.php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if(!empty($_POST)){
     try{
 

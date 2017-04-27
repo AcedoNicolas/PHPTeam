@@ -1,6 +1,7 @@
 <?php
 include_once ("classes/User.class.php");
 session_start();
+$user = $_SESSION['username'];
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
 
 
@@ -104,6 +105,8 @@ session_start();
           ?>
           </h1>
   <p>Je hebt nog geen pins leuk gevonden, ontdek ze hier !</p>
+          <p>
+          <a href="uploadtopic.php">Upload een inspiratie!</a>
   <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
         </div>
 </div>

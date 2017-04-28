@@ -82,7 +82,7 @@ else
             <input type="password" name="password" id="password" class="form-control" placeholder="wachtwoord">
 
             <button class="btn btn-default">log in</button>
-            <p>Schrijf je <a href="register.php">hier</a> in</p>
+            <p>Schrijf je <a href="login.php">hier</a> in</p>
 
         </form>
 

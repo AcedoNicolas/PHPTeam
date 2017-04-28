@@ -62,17 +62,6 @@ session_start();
         });
     </script>
 
-    <style>
-        .imdlogo{
-            width: 15%;
-        }
-        
-        .leegstatus{
-            margin-top: 250px;
-        }
-    
-    </style>
-    
 </head>
 <body>
     <div id="TotalContainer">
@@ -97,7 +86,7 @@ session_start();
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Zoek inspiratie">
         </div>
-        <button type="submit" class="btn btn-default">Zoek</button>
+        <button type="submit" class="btn btn-default" name"zoek">Zoek</button>
       </form>
 
       <ul class="nav navbar-nav navbar-right">
@@ -139,13 +128,16 @@ session_start();
         </div>
 </div>
     </div>
+
+
     <!-- change profielfoto -->
     <div class="popup" id="popup">
         <form action="" method="post">
             <ul>
                 <li><h3>Upload hier je foto</h3></li>
                 <li> <input type="file" name="avatar"></li>
-                <li> <input type="submit" id="opslaan" class="btn btn-primary" href="#" value="Opslaan"></li>
+                <li> <input type="submit" id="opslaan" class="btn btn-primary" href="#" value="Opslaan"><p>of <a
+                                href="">sluiten</a></p></li>
             </ul>
         </form>
     </div>

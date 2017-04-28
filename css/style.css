@@ -7,7 +7,7 @@
 }
 
 #avatar{
-    /* border-radius: 50%;*/
+    border-radius: 20%;
     height: 50px;
 }
 /* popup scherm voor verandering profiel foto / pass / username .. */
@@ -32,5 +32,10 @@
 .popup form h3{
     position: relative;
     top:-150px;
+}
+#post img{
+    height: 200px;
+    width: 400px;
+
 }
 

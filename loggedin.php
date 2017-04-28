@@ -1,5 +1,6 @@
 <?php
 include_once ("classes/User.class.php");
+include_once ("classes/Post.class.php");
 session_start();
 //$user = $_SESSION['username'];
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
@@ -13,19 +14,22 @@ session_start();
 
 //if sessie niet bestaat
     // redirect naar login.php
+$res = "";
+ if ((isset($_GET['zoek'])) && (!empty($_GET['zoek']))){
+     $zoekopdracht = $_GET['zoek'];
+
+     $search = new Post();
+     $res = $search->Search($zoekopdracht);
+      }
 
 
- /*if (isset($_GET['link'])) {
-     $link = $_GET['link'];
 
-     if ($link == '1') {
-         echo "link geklikt ";
-     }
-     if ($link == '2') {
-         echo 'paswoord aanpassen';
 
-     }
- }*/
+
+
+
+
+
 ?><!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -75,18 +79,19 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <img src="images/logoimd.png" alt=" logo imd" class="imdlogo">
-      <a class="navbar-brand" href="#">IMDterest</a>
+      <img src="images/logoimd.png" alt="logo imd" class="imdlogo">
+      <a class="navbar-brand" href="loggedin.php">IMDterest</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      <form class="navbar-form navbar-left">
+
+
+      <form action="" method="get" class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Zoek inspiratie">
+          <input type="text" class="form-control" placeholder="Zoek inspiratie" name="zoek">
         </div>
-        <button type="submit" class="btn btn-default" name"zoek">Zoek</button>
+        <button type="submit" class="btn btn-default">Zoek</button>
       </form>
 
       <ul class="nav navbar-nav navbar-right">
@@ -99,7 +104,7 @@ session_start();
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
               <li><a href="#" id="BtnAvatar" name="BtnAvatar">profielfoto aanpassen</a></li>
-            <li><a href="?link=2">Wijzig wachtwoord</a></li>
+            <li><a href="changepassword.php">Wijzig wachtwoord</a></li>
 
               <li><a href="logout.php">Log out</a></li>
           </ul>
@@ -110,8 +115,21 @@ session_start();
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-    
-    
+
+
+<?php foreach($res as $r): ?>
+<div id="post">
+    <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
+    <p><? echo $r['text'];
+    ?></p>
+            <br>
+<?php endforeach; ?>
+</div>
+
+
+
+
+
     <div class="jumbotron leegstatus">
       <div class="container">
           <h1> Hallo,

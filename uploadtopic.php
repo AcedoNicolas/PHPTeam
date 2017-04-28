@@ -2,6 +2,9 @@
 
 if (isset($_POST['upload'])) {
 
+// Deze code zou in de class Post moeten komen oop werken
+
+
     $target = "images/Posts/" . basename($_FILES['image']['name']);
 
     $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");

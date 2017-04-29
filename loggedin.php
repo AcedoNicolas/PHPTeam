@@ -171,7 +171,8 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
         <p><? echo $r['text'];?></p>
     </div>
     </a>
-<?php endforeach; endif; ?>
+<?php endforeach; endif; echo "<hr>"; ?>
+
 
         <div class="container">
             <div class="row">
@@ -181,7 +182,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
                 $records = $conn->prepare('SELECT * FROM images');
                 $records->execute();
                 while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"#\">";
+                    echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"post.php?nr=".$row['id']."\">";
 
                     echo "<img class='img-responsive' src='images/Posts/" . $row['image'] . "'></a>";
                     echo "<p>" . $row['text'] . "</p>";

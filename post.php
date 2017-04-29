@@ -167,9 +167,9 @@ $recentActivities = $activity->GetRecentActivities();
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
                     <form action="" method="post">
-                        <textarea placeholder="Vertel wat je van deze afbeelding denkt" name="activitymessage" ></textarea>
+                        <textarea placeholder="Vertel wat je van deze afbeelding denkt" id="activitymessage" name="activitymessage" ></textarea>
 
-                        <input type="submit" class="btn btn-success green" value="comment" ><i class="fa fa-share"></i>
+                        <input type="submit" class="btn btn-success green" value="comment" id="btnSubmit"><i class="fa fa-share"></i>
                     </form>
                 </div><!-- Status Upload  -->
             </div><!-- Widget Area -->
@@ -181,6 +181,8 @@ $recentActivities = $activity->GetRecentActivities();
 
 </div>
 
-
+<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+<script src="js/Feature9-ajax.js"></script>
+-->
 </body>
 </html>

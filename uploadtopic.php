@@ -35,23 +35,14 @@ if (isset($_POST['upload'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+
     <title>Document</title>
 </head>
 <body>
-<?php
-$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-$records = $conn->prepare('SELECT * FROM images');
-$records->execute();
-while($row = $records->fetch(PDO::FETCH_ASSOC) ){
-    echo "<div id='img_div'>";
-        echo "<img src='images/Posts/".$row['image']."'>";
-        echo "<p>".$row['text']."</p>";
-            echo "</div>";
-}
-
-
-?>
-
+<a href="loggedin.php">terug</a>
+<br>
+<br>
 <form action="" method="post" id="LoginForm" enctype='multipart/form-data'>
 
     <div>
@@ -65,6 +56,19 @@ while($row = $records->fetch(PDO::FETCH_ASSOC) ){
     </div>
 </form>
 
+<?php
+$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+$records = $conn->prepare('SELECT * FROM images');
+$records->execute();
+while($row = $records->fetch(PDO::FETCH_ASSOC) ){
+    echo "<div id='postGroot'>";
+    echo "<img src='images/Posts/".$row['image']."'>";
+    echo "<p>".$row['text']."</p>";
+    echo "</div>";
+}
+
+
+?>
 
 </body>
 </html>

@@ -116,20 +116,19 @@ $res = "";
   </div><!-- /.container-fluid -->
 </nav>
 
-
-<?php foreach($res as $r): ?>
-<div id="post">
-    <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-    <p><? echo $r['text'];
-    ?></p>
-            <br>
-<?php endforeach; ?>
-</div>
-
-
+<!-- post van de gevonden resultaten -->
+<?php if (!empty($res)): foreach($res as  $r): ?>
+    <a href="post.php?nr=<?php echo $r['id'] ; ?>">
+    <div id="post">
+        <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
+        <p><? echo $r['text'];?></p>
+    </div>
+    </a>
+<?php endforeach; endif; ?>
 
 
 
+<?php if (empty($res)): ?>
     <div class="jumbotron leegstatus">
       <div class="container">
           <h1> Hallo,
@@ -145,6 +144,7 @@ $res = "";
   <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
         </div>
 </div>
+        <?php endif; ?>
     </div>
 
 

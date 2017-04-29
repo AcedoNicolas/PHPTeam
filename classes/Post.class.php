@@ -21,26 +21,43 @@ class Post{
        $statement->execute();
 
         // uitlezen
-         /*while ($row = $statement->fetch()){
-              $row['text']."</br>";
 
-         }*/
-
-        /* $row = $statement->fetch();
-         return $row;*/
-
-
-         //return    $row['text'];
-
-
-            while($row = $statement->fetch()){
-            $this->data[]=$row;
-            //print_r($rows);
+            while ($row = $statement->fetch()) {
+                $this->data[] = $row;
+            }
+            try {
+                return $this->data;
+            }
+            catch(Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
         }
-            return $this->data;
 
 
-        }
+
+
+    function Ophalen ($id){
+
+        $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+
+        //query
+        //$statement = $conn->prepare("SELECT * FROM `images` WHERE id is :id");
+        $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
+        //$statement = $conn->prepare("SELECT * FROM `images`");
+
+        $statement->bindValue(':id',$id);
+
+
+        //query starten
+       $statement->execute();
+
+        $row = $statement->fetch();
+        //var_dump($row);
+        return $row;
+
+
+
+    }
 
 
 

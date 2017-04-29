@@ -1,6 +1,7 @@
 <?php
 include_once ("classes/User.class.php");
 include_once ("classes/Post.class.php");
+include_once ("classes/Upload.class.php");
 session_start();
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
 
@@ -26,6 +27,19 @@ if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
      //$g->setAvatar();
 }
  var_dump($_SESSION);
+
+if((isset($_POST['upload']))&&(!empty($_POST))) {
+    try {
+
+
+        $upload = new upload();
+        $upload->image = $_FILES['image']['name'];
+        $upload->text = $_POST['text'];
+        $upload->TryUpload();
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+    }
+}
 
 ?><!DOCTYPE html>
 <html lang="nl">
@@ -112,6 +126,40 @@ if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Upload inspiratie</button>
+
+        <!-- Modal -->
+        <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Upload inspiratie</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" id="LoginForm" enctype='multipart/form-data'>
+
+                            <div>
+                                <input type="file" name="image">
+                            </div>
+                            <div>
+                                <textarea name="text" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <div>
+                                <button class="btn btn-default" id="BtnLogin" name="upload">Upload</button>
+                            </div>
+                        </form>
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <h2><?php if (isset($feedback)){echo $feedback;} ?></h2>
 
@@ -125,6 +173,49 @@ if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
     </a>
 <?php endforeach; endif; ?>
 
+        <div class="container">
+            <div class="row">
+
+                <?php
+                $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+                $records = $conn->prepare('SELECT * FROM images');
+                $records->execute();
+                while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"#\">";
+
+                    echo "<img class='img-responsive' src='images/Posts/" . $row['image'] . "'></a>";
+                    echo "<p>" . $row['text'] . "</p>";
+                    echo "<p> Door: " . $row['eigenaar'] . "</p>";
+                    echo "</div>";
+
+
+                }
+
+
+                ?>
+
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
 
 
 <?php if (empty($res)): ?>
@@ -145,6 +236,7 @@ if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
 </div>
         <?php endif; ?>
     </div>
+
 
 
     <!-- change profielfoto -->

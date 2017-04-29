@@ -32,8 +32,7 @@ if(!empty($_POST['activitymessage']))
 }
 
 //altijd alle laatste activiteiten ophalen
-//$recentActivities = $activity->GetRecentActivities();
-
+$recentActivities = $activity->GetRecentActivities();
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -98,25 +97,57 @@ if(!empty($_POST['activitymessage']))
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
 </div>
 
-<!--<div>
-    <ul id="listupdates">
-        <?php
-/*        if(mysqli_num_rows($recentActivities) > 0)
-        {
-            while($singleActivity = mysqli_fetch_assoc($recentActivities))
-            {
-                echo "<li><h2>GoodBytes.be</h2> ". $singleActivity['activity_description'] ."</li>";
-            }
-        }
-        else
-        {
-            echo "<li>Waiting for first status update</li>";
-        }
-        */?>
-    </ul>
+<div id="commentSection">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="page-header">Comments</h2>
+                <section class="comment-list">
+                    <!-- First Comment -->
+
+                    <?php if(count($recentActivities) > 0): ?>
+
+                    <?php foreach($recentActivities as $key=>$singleActivity):?>
 
 
-</div>-->
+                    <article class="row">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" src="<?php echo $_SESSION['avatar']; ?>" />
+                                <figcaption class="text-center"><?php echo $_SESSION['fullname'] ;?></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <!--<header class="text-left">
+                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                    </header> -->
+                                    <div class="comment-post">
+                                        <p>
+                                            <?php echo $singleActivity['comment_des'] ;?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                        <?php endforeach; ?>
+
+                    <?php else: ?>
+
+                        <p> <?php echo "Schrijf de eerste commentaar !"; ?></p>
+
+
+                    <?php endif; ?>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div id="comment">

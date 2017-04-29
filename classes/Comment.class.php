@@ -49,22 +49,26 @@ Class Comment
         $statement->execute();
         // uitlezen
 
-        echo 'gelukt';
-        var_dump($_SESSION);
     }
 
 
         public
         function GetRecentActivities()
         {
-            if ($link = mysqli_connect($this->m_sHost, $this->m_sUser, $this->m_sPassword, $this->m_sDatabase)) {
-                $sSql = "select * from tblactivities ORDER BY pk_activity_id DESC LIMIT 5";
-                $rResult = mysqli_query($link, $sSql);
-                return $rResult;
-            } else {
-                // er kon geen connectie gelegd worden met de databank
-                throw new Exception('Ooh my, something terrible happened to the database connection');
-            }
+            $idPost = $_GET['nr'];
+
+
+            $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+            $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $idPost");
+            //$statement->execute();
+
+            $result = $statement->execute();
+            $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+            //while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            //var_dump($row);
+                return $row;
+            //}
+
 
 
         }

@@ -26,7 +26,6 @@ if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
      $g = new User();
      //$g->setAvatar();
 }
- var_dump($_SESSION);
 
 if((isset($_POST['upload']))&&(!empty($_POST))) {
     try {
@@ -40,6 +39,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
         $error = $e->getMessage();
     }
 }
+
 
 ?><!DOCTYPE html>
 <html lang="nl">
@@ -175,7 +175,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 
         <div class="container">
             <div class="row">
-
+            <!-- niet oop gewerkt, beter om in de classe post een functie te maken -->
                 <?php
                 $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
                 $records = $conn->prepare('SELECT * FROM images');
@@ -216,7 +216,6 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
                 </div>
             </div>
         </div>
-
 
 <?php if (empty($res)): ?>
     <div class="jumbotron leegstatus">

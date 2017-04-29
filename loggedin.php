@@ -2,7 +2,6 @@
 include_once ("classes/User.class.php");
 include_once ("classes/Post.class.php");
 session_start();
-//$user = $_SESSION['username'];
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
 
 
@@ -22,13 +21,11 @@ $res = "";
      $res = $search->Search($zoekopdracht);
       }
 
-
-
-
-
-
-
-
+if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
+     $g = new User();
+     //$g->setAvatar();
+}
+ var_dump($_SESSION);
 
 ?><!DOCTYPE html>
 <html lang="nl">
@@ -95,7 +92,7 @@ $res = "";
       </form>
 
       <ul class="nav navbar-nav navbar-right">
-          <li> <img src="images/avatar2.jpg" alt="avatar foto" id="avatar"></li>
+          <li> <img src="<?php echo $_SESSION['avatar']; ?>" alt="avatar foto" id="avatar"></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn account <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -115,6 +112,8 @@ $res = "";
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+        <h2><?php if (isset($feedback)){echo $feedback;} ?></h2>
 
 <!-- post van de gevonden resultaten -->
 <?php if (!empty($res)): foreach($res as  $r): ?>

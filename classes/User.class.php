@@ -2,7 +2,6 @@
 
 class User{
     private $m_sFullname;
-    private $m_sUsername;
     private $m_sEmail;
     private $m_sPassword;
 
@@ -11,10 +10,6 @@ class User{
         switch ($p_sProporty){
             case "Fullname":
                 $this->m_sFullname = $p_vValue;
-                break;
-
-            case "Username":
-                $this->m_sUsername  = $p_vValue;
                 break;
 
             case "Email":
@@ -37,10 +32,6 @@ class User{
                 return $this->m_sFullname;
                 break;
 
-            case "Username":
-                return $this->m_sUsername;
-                break;
-
             case "Email":
                 return $this->m_sEmail;
                 break;
@@ -59,9 +50,8 @@ class User{
         $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
 
         //query
-        $statement = $conn->prepare("INSERT INTO Users (fullname,username,email,password) VALUES (:Fullname,:Username,:Email,:Password)");
+        $statement = $conn->prepare("INSERT INTO Users (fullname,email,password) VALUES (:Fullname,:Email,:Password)");
         $statement->bindValue(":Fullname",$this->m_sFullname);
-        $statement->bindValue(":Username",$this->m_sUsername);
         $statement->bindValue(":Email",$this->m_sEmail);
         $statement->bindValue(":Password",$this->m_sPassword);
 
@@ -75,11 +65,34 @@ class User{
 
     }
 
+    public function setAvatar(){
+            //$target = "images/Posts/avatar" . basename($_FILES['image']['name']);
+
+            $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+
+            //$image = $_FILES['image']['name'];
+            $id = $_SESSION['user_id'];
+            $statement=$conn->prepare("SELECT * from Users WHERE ID = $id");
+            //$res=$statement->execute();
 
 
-    public function Login($email, $password){
+        /*
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+                        $msg="Gelukt!";
+
+                    }
+                    else{
+                        $msg = "Probeer opnieuw!";
+
+
+
+                }*/
+
+
 
     }
+
+
 
 
 

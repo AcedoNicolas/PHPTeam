@@ -85,17 +85,19 @@
 
 /* comment gedeelte */
 #comment{
-    width: 50%;
-    height: 100px;
+    width: 700px;
+    height: 230px;
     background-color: #9d9d9d;
     margin-left: auto;
     margin-right: auto;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
 
 }
 #comment form{
     position: relative;
-    top: -80px;
-    background-color: #2aabd2;
-    margin-left: 400px;
+    top: -30px;
+    margin-left: 100px;
+
 
 }

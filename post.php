@@ -1,14 +1,38 @@
 <?php
 include_once ("classes/Post.class.php");
+include_once ("classes/Comment.class.php");
+session_start();
 
-if (isset($_GET['nr'])){
+/* post ophalen en laten zien */
+if ((isset($_GET['nr']))&&(!empty($_GET['nr']))){
     $detail = new Post();
-
     $postID = $_GET['nr'];
-
-     $r=$detail->Ophalen($postID);
-
+    $r=$detail->Ophalen($postID);
 }
+else{
+    header("location:loggedin.php");
+}
+
+/* comment plaatsen */
+$activity = new Comment();
+
+//controleer of er een update wordt verzonden
+if(!empty($_POST['activitymessage']))
+{
+    $activity->Text = $_POST['activitymessage'];
+    try
+    {
+        //$comm = $_POST['activitymessage'];
+        $activity->SavePost();
+    }
+    catch (Exception $e)
+    {
+        $feedback = $e->getMessage();
+    }
+}
+
+//altijd alle laatste activiteiten ophalen
+//$recentActivities = $activity->GetRecentActivities();
 
 ?><!doctype html>
 <html lang="en">
@@ -24,6 +48,8 @@ if (isset($_GET['nr'])){
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/commentStyle.css">
+
     <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
 
     <title>post</title>
@@ -47,12 +73,7 @@ if (isset($_GET['nr'])){
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
                 <a href="loggedin.php" class="btn btn-default">terug</a>
-
-
-
 
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -68,12 +89,7 @@ if (isset($_GET['nr'])){
         </a>
     <?php endforeach; endif; ?>
 
-
-
-
 </div>
-
-
 
 
 <div id="postGroot">
@@ -81,18 +97,59 @@ if (isset($_GET['nr'])){
 
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
 </div>
+
+<!--<div>
+    <ul id="listupdates">
+        <?php
+/*        if(mysqli_num_rows($recentActivities) > 0)
+        {
+            while($singleActivity = mysqli_fetch_assoc($recentActivities))
+            {
+                echo "<li><h2>GoodBytes.be</h2> ". $singleActivity['activity_description'] ."</li>";
+            }
+        }
+        else
+        {
+            echo "<li>Waiting for first status update</li>";
+        }
+        */?>
+    </ul>
+
+
+</div>-->
+
+
 <div id="comment">
-    <div commentinfo>
+    <!--<div commentinfo>
     <img src="images/avatar.png" alt="avatar">
     <p>naam eigenaar</p>
-    </div>
+    </div>-->
 
-    <form action="" method="post">
-        <label for="inputcomment">commentaar</label>
-        <input type="text" name="comment" id="inputcomment" >
-        <input type="submit" value="verzenden">
-    </form>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="widget-area no-padding blank">
+                <div class="status-upload">
+                    <form action="" method="post">
+                        <textarea placeholder="Vertel wat je van deze afbeelding denkt" name="activitymessage" ></textarea>
+
+                        <input type="submit" class="btn btn-success green" value="comment" ><i class="fa fa-share"></i>
+                    </form>
+                </div><!-- Status Upload  -->
+            </div><!-- Widget Area -->
+        </div>
+    </div>
+</div>
+
+
 
 </div>
+
+
 </body>
 </html>

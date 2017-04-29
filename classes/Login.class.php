@@ -6,7 +6,6 @@ class Login
 
     public function Trylogin()
     {
-        session_start();
 
 
         if (isset($_SESSION['user_id'])) {
@@ -30,6 +29,8 @@ class Login
                 header("Location: loggedin.php");
                 $_SESSION['email'] = $results['email'];
                 $_SESSION['fullname'] = $results['fullname'];
+                $_SESSION['avatar'] = $results['avatar'];
+
 
             } else {
                 $message = 'Sorry, those credentials do not match';

@@ -1,13 +1,14 @@
 <?php
-//session_start();
+session_start();
 include "classes/Login.class.php";
 include_once ("classes/User.class.php");
-$user = $_SESSION['username'];
+if (isset($_POST)) {
 
+}
 
 if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     try {
-        $login = new login();
+        $login = new Login();
         $login->Email = $_POST["email"];
         $login->Password = $_POST["password"];
         $login->Trylogin();
@@ -15,24 +16,18 @@ if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
+
 }
 else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
 
     try{
         $user = new user();
-        $fullnameErr = $usernameErr = $emailErr = $passErr = "";
+        $fullnameErr = $emailErr = $passErr = "";
         if (empty($_POST["fullname"])) {
             $fullnameErr = "Full name is required";
         }
         else{
             $user->Fullname= $_POST["fullname"];
-        }
-
-        if (empty($_POST["username"])) {
-            $usernameErr = "username is required";
-        }
-        else {
-            $user->Username = $_POST["username"];
         }
 
         if (empty($_POST["email"])) {
@@ -51,7 +46,7 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
         }
 
 
-        if(empty($fullnameErr || $usernameErr || $emailErr || $passErr)){
+        if(empty($fullnameErr || $emailErr || $passErr)){
             $user->Save();
             header("Location: loggedin.php");
             //$succes = "the user has been saved.";
@@ -60,7 +55,6 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
     catch (Exception $e){
         $error= $e->getMessage();
     }
-
 }
 
 
@@ -132,12 +126,6 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
                 <label for="fullname">Jouw naam</label>
                 <p class="MsgError"><?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?></p>
                 <input type="text" id="fullname" name="fullname" class="form-control" placeholder="volledige naam">
-
-
-                <label for="username">username</label>
-                <p class="MsgError"><?php if(!empty($usernameErr)){ echo $usernameErr;} ?></p>
-
-                <input type="text" id="username" name="username" class="form-control" placeholder="username">
 
 
                 <label for="email">email</label>

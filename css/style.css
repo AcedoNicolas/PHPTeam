@@ -111,3 +111,7 @@ popupDelete p{
 .errorText{
     color: red;
 }
+.kleinText{
+    font-size: x-small;
+    color:#999999;
+}

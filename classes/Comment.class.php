@@ -7,7 +7,6 @@
  */
 Class Comment
 {
-
     public $m_sText;
 
 
@@ -34,7 +33,6 @@ Class Comment
 
     public function SavePost()
     {
-
         //connectie maken (PDO)
         $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
 
@@ -43,33 +41,32 @@ Class Comment
         $statement->bindValue(':Text', $this->m_sText);
         $statement->bindValue(':User', $_SESSION['user_id']);
         $statement->bindValue(':Post', $_GET['nr']);
-
-
-        //query starten
         $statement->execute();
-        // uitlezen
-
     }
 
 
-        public
-        function GetRecentActivities()
+        public function GetRecentActivities()
         {
             $idPost = $_GET['nr'];
 
-
             $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $idPost");
-            //$statement->execute();
+            $statement->execute();
 
-            $result = $statement->execute();
             $row = $statement->fetchAll(PDO::FETCH_ASSOC);
-            //while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            //var_dump($row);
+
                 return $row;
-            //}
+                    }
 
+        public function GegevensOphalen($id)
+        {
+            $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
 
+            $statement = $conn->prepare("SELECT id,fullname, avatar FROM `Users` WHERE id = $id");
+            $statement->execute();
+
+            $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $row;
 
         }
 

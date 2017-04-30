@@ -14,7 +14,8 @@ session_start();
 
 //if sessie niet bestaat
     // redirect naar login.php
-$res = "";
+
+
  if ((isset($_GET['zoek'])) && (!empty($_GET['zoek']))){
      $zoekopdracht = $_GET['zoek'];
 
@@ -151,7 +152,6 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
                                 <button class="btn btn-default" id="BtnLogin" name="upload">Upload</button>
                             </div>
                         </form>
-                        <p>Some text in the modal.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

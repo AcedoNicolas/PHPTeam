@@ -19,20 +19,25 @@ class Post{
 
         //query starten
         $statement->execute();
+
         // uitlezen
-
         $count = $statement->rowCount();
-
         if ($count > 0) {
 
+            //$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+
+
             while ($row = $statement->fetch()) {
-                //var_dump($row);
                 $this->data[] = $row;
             }
             return $this->data;
 
-        }else{
+        }else {
+            //$msg = "We hebben helaas niets gevonden";
             echo 'We hebben helaas niets gevonden';
+            //return $msg;
         }
     }
 
@@ -44,13 +49,11 @@ class Post{
     function Ophalen ($id){
         $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
         //query
-        //$statement = $conn->prepare("SELECT * FROM `images` WHERE id is :id");
         $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
-        //$statement = $conn->prepare("SELECT * FROM `images`");
         $statement->bindValue(':id',$id);
         //query starten
        $statement->execute();
-        $row = $statement->fetch();
+       $row = $statement->fetch();
         //var_dump($row);
         return $row;
 
@@ -79,7 +82,6 @@ public function DeletePost()
 $count = $statement->rowCount();
 // als row count = 1
 if ($count = 1){
-
     if ($res['eigenaar'] == $this->m_sGebruiker){
         // dan verwijder
         // querry maken 'delete'

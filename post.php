@@ -30,8 +30,9 @@ if(!empty($_POST['activitymessage']))
         $feedback = $e->getMessage();
     }
 }
-//altijd alle laatste activiteiten ophalen
+//altijd alle laatste comments ophalen
 $recentActivities = $activity->GetRecentActivities();
+
 
 // foto verwijderen
 if(isset($_POST['Dltbutton2'])){
@@ -143,12 +144,16 @@ if(isset($_POST['Dltbutton2'])){
 
                     <?php foreach($recentActivities as $key=>$singleActivity):?>
 
+                    <?php   $commentGeg = new comment();
+                            $userID = $singleActivity['idUser'];
+                            $persoon=$commentGeg->GegevensOphalen($userID);
+                    ?>
 
                     <article class="row">
                         <div class="col-md-2 col-sm-2 hidden-xs">
                             <figure class="thumbnail">
-                                <img class="img-responsive" src="<?php echo $_SESSION['avatar']; ?>" />
-                                <figcaption class="text-center"><?php echo $_SESSION['fullname'] ;?></figcaption>
+                                <img class="img-responsive" src="<?php echo $persoon[0]['avatar']; ?>" />
+                                <figcaption class="text-center"><?php echo $persoon[0]['fullname'] ;?></figcaption>
                             </figure>
                         </div>
                         <div class="col-md-10 col-sm-10">
@@ -160,7 +165,9 @@ if(isset($_POST['Dltbutton2'])){
                                     <div class="comment-post">
                                         <p>
                                             <?php echo $singleActivity['comment_des'] ;?>
+
                                         </p>
+                                        <p class="kleinText">gepotst op: <?php echo $singleActivity['time']; ?></p>
                                     </div>
                                 </div>
                             </div>

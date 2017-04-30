@@ -30,9 +30,24 @@ if(!empty($_POST['activitymessage']))
         $feedback = $e->getMessage();
     }
 }
-
 //altijd alle laatste activiteiten ophalen
 $recentActivities = $activity->GetRecentActivities();
+
+// foto verwijderen
+if(isset($_POST['Dltbutton2'])){
+    $Del = new Post();
+    $Del->m_iIdpost = $_GET['nr'];
+    $Del->m_sGebruiker = $_SESSION['fullname'];
+    $res2 = $Del->DeletePost();
+    if ($res2 === true){
+        $feedback = "de foto is goed verwijderd";
+        header('location: post.php');
+    }else{
+        $feedback = $res2;
+    }
+}
+
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -40,7 +55,6 @@ $recentActivities = $activity->GetRecentActivities();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -50,6 +64,7 @@ $recentActivities = $activity->GetRecentActivities();
     <link rel="stylesheet" href="css/commentStyle.css">
 
     <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
+    <link rel="stylesheet" href="css/style.css">
 
     <title>post</title>
 </head>
@@ -95,8 +110,26 @@ $recentActivities = $activity->GetRecentActivities();
     <h1><?php echo $r['text'];?></h1>
 
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-</div>
+    <div>
+        <form action="" method="post">
+            <input type="submit" value="verwijder deze foto" name="Dltbutton">
+        </form>
+        <p class="errorText"><?php if (isset($feedback)){echo $feedback;} ;?></p>
+    </div>
 
+    <!-- weet je zeker dat je dit wilt verwijderen -->
+    <?php if (isset($_REQUEST['Dltbutton'])):?>
+    <div id="popupDelete">
+        <form action="" method="post">
+            <p>weet je zeker dat je dit wilt verwijderen?</p>
+            <input type="submit" name="Dltbutton2" value="ja">
+            <a href="">nee</a>
+
+        </form>
+    </div>
+    <?php endif; ?>
+
+</div>
 <div id="commentSection">
 
     <div class="container">

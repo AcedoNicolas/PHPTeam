@@ -41,8 +41,6 @@ body{
     display: inline;
     padding: 50px;
     background-color: lightgray;
-
-
 }
 #post img{
     max-width:300px;
@@ -60,8 +58,6 @@ body{
     column-break-inside: avoid;
     padding: 15px;
     padding-bottom: 5px;
-
-
 }
 
 #post img {
@@ -92,13 +88,26 @@ body{
     background-color: #9d9d9d;
     margin-left: auto;
     margin-right: auto;
-
-
 }
 #comment form{
     position: relative;
     top: -30px;
     margin-left: 100px;
-
-
+}
+/* popup voor de foto te verwijderen */
+#popupDelete{
+    background-color:#a94442;
+    width: 400px;
+    height: 100px;
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    padding-top: 20px;
+    border-radius: 30px;
+}
+popupDelete p{
+    font-size: 16px;
+}
+.errorText{
+    color: red;
 }

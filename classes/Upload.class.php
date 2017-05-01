@@ -4,12 +4,11 @@ class Upload
 {
     public function TryUpload()
     {
-
-
-
-
         // voorlopig upload php code hier
         $eigenaar = $_SESSION['fullname'];
+        $locatie = $_SESSION['location'];
+
+
         //var_dump($eigenaar);
 
         if (isset($_POST['upload'])) {
@@ -21,10 +20,13 @@ class Upload
             $image = $_FILES['image']['name'];
             $text = $_POST['text'];
 
-            $statement = $conn->prepare("INSERT INTO Images (image, text, eigenaar) VALUES ('$image','$text','$eigenaar')");
+            //$statement = $conn->prepare("INSERT INTO Images (image, text, eigenaar, locatie) VALUES ('$image','$text','$eigenaar','$locatie')");
+            $statement = $conn->prepare("INSERT INTO Images (image, text, eigenaar, locatie) VALUES (:image, :text, :eigenaar, :locatie)");
             $statement->bindValue(":image", $image);
             $statement->bindValue(":text", $text);
             $statement->bindValue(":eigenaar", $eigenaar);
+            $statement->bindValue(":locatie", $locatie);
+
 
             $res = $statement->execute();
 

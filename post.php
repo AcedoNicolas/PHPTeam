@@ -111,6 +111,7 @@ if(isset($_POST['Dltbutton2'])){
     <h1><?php echo $r['text'];?></h1>
 
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
+    <p><?php echo "Geplaatst door: <b>".$r['eigenaar']. "</b> in <b>". $r['locatie']. "</b> om <b>".$r['time']. "</b> uur" ;?></p>
     <div>
         <form action="" method="post">
             <input type="submit" value="verwijder deze foto" name="Dltbutton">

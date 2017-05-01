@@ -14,7 +14,7 @@ class Post{
 
         //query
         //$statement = $conn->prepare("SELECT * FROM `images` WHERE text like ':key'");
-        $statement = $conn->prepare("SELECT * FROM `images` WHERE text like :key");
+        $statement = $conn->prepare("SELECT * FROM `images` WHERE ( text like :key) or (eigenaar like :key)or (locatie like :key)");
         $statement->bindValue(':key', '%' . $zoek . '%');
 
         //query starten

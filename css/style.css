@@ -35,7 +35,7 @@ body{
     position: relative;
     top:-150px;
 }
-/* post zijn de individuele posts bij het zoeken */
+/* post = de individuele posts bij het zoeken */
 #post{
     margin: 20px;
     display: inline;
@@ -105,8 +105,9 @@ body{
     padding-top: 20px;
     border-radius: 30px;
 }
-popupDelete p{
-    font-size: 16px;
+#popupDelete p{
+    font-size: 18px;
+    color: white;
 }
 .errorText{
     color: red;

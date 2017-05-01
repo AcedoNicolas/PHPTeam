@@ -51,7 +51,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
@@ -77,6 +77,8 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             });
         });
     </script>
+    <script src="js/bootstrap.js"></script>
+
 
 </head>
 <body>
@@ -117,7 +119,6 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             <li role="separator" class="divider"></li>
               <li><a href="#" id="BtnAvatar" name="BtnAvatar">profielfoto aanpassen</a></li>
             <li><a href="changepassword.php">Wijzig wachtwoord</a></li>
-
               <li><a href="logout.php">Log out</a></li>
           </ul>
         </li>
@@ -127,6 +128,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Upload inspiratie</button>
 
         <!-- Modal -->
@@ -158,6 +160,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
                     </div>
                 </div>
 
+
             </div>
         </div>
 
@@ -166,7 +169,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 <!-- post van de gevonden resultaten -->
 <?php if (!empty($res)): foreach($res as  $r): ?>
     <a href="post.php?nr=<?php echo $r['id'] ; ?>">
-    <div id="post">
+    <div id="post" class="ThumbPost">
         <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
         <p><? echo $r['text'];?></p>
     </div>
@@ -178,43 +181,34 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             <div class="row">
             <!-- niet oop gewerkt, beter om in de classe post een functie te maken -->
                 <?php
-                $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-                $records = $conn->prepare('SELECT * FROM images');
-                $records->execute();
-                while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"post.php?nr=".$row['id']."\">";
+                    $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+                    $records = $conn->prepare('SELECT * FROM images');
+                    $records->execute();?>
+                <!--   while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"post.php?nr=" . $row['id'] . "\">";
 
-                    echo "<img class='img-responsive' src='images/Posts/" . $row['image'] . "'></a>";
-                    echo "<p>" . $row['text'] . "</p>";
-                    echo "<p> Door: " . $row['eigenaar'] . "</p>";
-                    echo "</div>";
+                        echo "<img class='img-responsive' src='images/Posts/" . $row['image'] . "'></a>";
+                        echo "<p>" . $row['text'] . "</p>";
+                        echo "<p> Door: " . $row['eigenaar'] . "</p>";
+                        echo "</div>";
+                }-->
+                <ul id="thumbails" class="list-unstyled container-fluid">
 
-
-                }
-
-
-                ?>
-
-                <div class="col-md-3 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                <?php while ($row = $records->fetch(PDO::FETCH_ASSOC)): ?>
+                    <a href="post.php?nr=<?php echo $row['id'];?>">
+                    <div class="thumbnail col-md-2">
+                        <img src="<?php echo "images/Posts/".$row['image']; ?>" alt="titre">
+                        <div class="caption text-center">
+                            <h3><?php echo $row['text'];?></h3>
+                            <p>Van:
+                            <b><?php echo $row['eigenaar'] ; ?></b>
+                            </p>
+                        </div>
+                    </div>
                     </a>
-                </div>
-                <div class="col-md-3 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                    </a>
-                </div>
+                <?php endwhile; ?>
+                </ul>
+
             </div>
         </div>
 
@@ -231,7 +225,10 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
   <p>Je hebt nog geen pins leuk gevonden, ontdek ze hier !</p>
           <p>
           <a href="uploadtopic.php">Upload een inspiratie!</a>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">pins zoeken</a></p>
+          <form action="" method="post">
+              <input type="submit" value="pins zoeken" name="pinszoeken" class="btn btn-primary btn-lg">
+          </form>
+
         </div>
 </div>
         <?php endif; ?>
@@ -251,8 +248,62 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
         </form>
     </div>
 
+    <?php
+    if (empty($_SESSION['location'])):?>
+    <script>
+        $(document).ready(function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+                /*   function getLocation() {
+                 if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(showPosition);
+                 } else {
+                 x.innerHTML = "Geolocation is not supported by this browser.";
+                 }
+                 }*/
+                function showPosition(position) {
+                    /*x.innerHTML = "Latitude: " + position.coords.latitude +
+                     "<br>Longitude: " + position.coords.longitude;*/
+
+                    var javascriptVariable = position.coords.latitude + "-" + position.coords.longitude;
+                    window.location.href = "loggedin.php?place=" + javascriptVariable;
+                }
+
+        });
+    </script>
+    <?php endif; ;?>
+    <?php
+    if (!empty($_GET['place'])) {
+        $data = $_GET['place'];
+        list($lat, $long) = explode("-", $data);
 
 
-    <!-- <footer> hier komen nog links in</footer> -->
+        //$lat="50.930690";
+        //$long = "5.332480";
+
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_ENCODING, "");
+        $curlData = curl_exec($curl);
+        curl_close($curl);
+
+        $address = json_decode($curlData);
+        //var_dump($address->results[0]->address_components[2]->long_name);
+        //echo ($address->results[0]->address_components[2]->long_name)."<br>";
+        $location = $address->results[0]->address_components[2]->long_name;
+        //echo $location;
+        $_SESSION['location'] = $location;
+    }
+    //echo "de locatie is".$_SESSION['location'];
+    ;?>
 </body>
+
 </html>

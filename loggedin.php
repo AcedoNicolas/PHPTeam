@@ -55,7 +55,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- info over bootstrap =>      http://getbootstrap.com/components/       -->
-   
+
     <!-- linken css-->
     <link rel="stylesheet" href="css/style.css">
 
@@ -172,40 +172,34 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 
 
 
-        <div class="container">
+
+            <!-- Projects Row -->
             <div class="row">
-            <!-- niet oop gewerkt, beter om in de classe post een functie te maken -->
                 <?php
-                    $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-                    $records = $conn->prepare('SELECT * FROM images');
-                    $records->execute();?>
-                <!--   while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<div class=\"col-md-3 portfolio-item\">  <a href=\"post.php?nr=" . $row['id'] . "\">";
+                $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+                $records = $conn->prepare('SELECT * FROM images');
+                $records->execute();
+                    while ($row = $records->fetch(PDO::FETCH_ASSOC)): ?>
+                        <a href="post.php?nr=<?php echo $row['id'];?>">
 
-                        echo "<img class='img-responsive' src='images/Posts/" . $row['image'] . "'></a>";
-                        echo "<p>" . $row['text'] . "</p>";
-                        echo "<p> Door: " . $row['eigenaar'] . "</p>";
-                        echo "</div>";
-                }-->
-                <ul id="thumbails" class="list-unstyled container-fluid">
-
-                <?php while ($row = $records->fetch(PDO::FETCH_ASSOC)): ?>
-                    <a href="post.php?nr=<?php echo $row['id'];?>">
-                    <div class="thumbnail col-md-2">
-                        <img src="<?php echo "images/Posts/".$row['image']; ?>" alt="titre">
-                        <div class="caption text-center">
-                            <h3><?php echo $row['text'];?></h3>
-                            <p>Van:
-                            <b><?php echo $row['eigenaar'] ; ?></b>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                <?php endwhile; ?>
-                </ul>
+                            <div class="col-md-4 portfolio-item">
+                                <img class="projectImg" src="<?php echo "images/Posts/".$row['image']; ?>" alt="titre">
+                                <div class="caption text-center">
+                                    <h3><?php echo $row['text'];?></h3>
+                                    <p>Van:
+                                        <b><?php echo $row['eigenaar'] ; ?></b>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endwhile; ?>
 
             </div>
         </div>
+
+
+
+
 <!-- als je nog geen pins leuk hebt gevonden -->
 <?php if (empty($res)): ?>
     <div class="jumbotron leegstatus">

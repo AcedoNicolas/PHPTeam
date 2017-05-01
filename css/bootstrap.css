@@ -1617,6 +1617,7 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  height:400px;
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left;
@@ -1647,6 +1648,7 @@ pre code {
 }
 .col-xs-4 {
   width: 33.33333333%;
+  height:400px;
 }
 .col-xs-3 {
   width: 25%;
@@ -1962,6 +1964,7 @@ pre code {
   }
   .col-md-4 {
     width: 33.33333333%;
+    height:400px;
   }
   .col-md-3 {
     width: 25%;
@@ -5000,8 +5003,8 @@ a.badge:focus {
 }
 .thumbnail {
   display: block;
-  padding: 4px;
-  margin-bottom: 20px;
+  padding: 40px;
+  margin-bottom: 200px;
   line-height: 1.42857143;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -6754,4 +6757,6 @@ button.close {
     display: none !important;
   }
 }
+
+
 /*# sourceMappingURL=bootstrap.css.map */

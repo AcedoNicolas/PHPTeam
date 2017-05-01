@@ -77,8 +77,6 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             });
         });
     </script>
-    <script src="js/bootstrap.js"></script>
-
 
 </head>
 <body>
@@ -99,9 +97,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-      <form action="" method="get" class="navbar-form navbar-left">
+ <form action="" method="get" class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Zoek inspiratie" name="zoek">
         </div>
@@ -123,8 +119,6 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
           </ul>
         </li>
       </ul>
-
-
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -177,6 +171,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 <?php endforeach; endif; echo "<hr>"; ?>
 
 
+
         <div class="container">
             <div class="row">
             <!-- niet oop gewerkt, beter om in de classe post een functie te maken -->
@@ -211,7 +206,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
 
             </div>
         </div>
-
+<!-- als je nog geen pins leuk hebt gevonden -->
 <?php if (empty($res)): ?>
     <div class="jumbotron leegstatus">
       <div class="container">
@@ -248,6 +243,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
         </form>
     </div>
 
+    <!-- locatie bepalen -->
     <?php
     if (empty($_SESSION['location'])):?>
     <script>

@@ -2,6 +2,8 @@
 include_once ("classes/User.class.php");
 include_once ("classes/Post.class.php");
 include_once ("classes/Upload.class.php");
+include_once ("classes/Db.php");
+
 session_start();
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
 
@@ -176,8 +178,10 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             <!-- Projects Row -->
             <div class="row">
                 <?php
-                $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-                $records = $conn->prepare('SELECT * FROM images');
+                //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+                $conn = Db::getInstance();
+
+                $records = $conn->prepare('SELECT * FROM images ORDER BY id DESC');
                 $records->execute();
                     while ($row = $records->fetch(PDO::FETCH_ASSOC)): ?>
                         <a href="post.php?nr=<?php echo $row['id'];?>">

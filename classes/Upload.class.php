@@ -1,4 +1,5 @@
 <?php
+include_once ("classes/Db.php");
 
 class Upload
 {
@@ -16,8 +17,8 @@ class Upload
             $target = "images/Posts/" . basename($_FILES['image']['name']);
 
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+            $conn = Db::getInstance();
             $image = $_FILES['image']['name'];
             $text = $_POST['text'];
 

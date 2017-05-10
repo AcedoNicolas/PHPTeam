@@ -53,17 +53,19 @@ if(isset($_POST['Dltbutton2'])){
  $verlopentijd = $time->humanTiming($tijd);
 
 // een foto liken
-
          if ((isset($_POST['like'])) || (isset($_POST['dislike']))){
+
                  if (isset($_POST['like'])){
                      $klik= true;
                  }if (isset($_POST['dislike'])){
                      $klik = false;
                  }
              $like = new Comment();
+                 $like->idUser = $_SESSION['user_id'];
+                 $like->idPost = $_GET['nr'];
              $feed = $like->likeDoorgeven($klik);
          }
-//echo $feed;
+
  // likes weergeven
 $geef = new Comment();
 $showlikes=$geef->likesUitlezen();
@@ -142,7 +144,7 @@ $showDislikes=$geef->dislikesUitlezen();
             <p>Deze foto heeft <?php echo "<b>".$showDislikes."</b>" ;?> Dislikes</p>
         <?php endif; ?>
 
-        <?php if (isset($feedbackLike)){ echo "<p class='errortext'>".$feedbackLike."</p>";} ;?>
+        <?php if (isset($feed)){ echo "<p class='errorText'>".$feed."</p>";} ;?>
 
         <form action="" method="post">
             <p>like de foto nu</p>
@@ -261,7 +263,7 @@ $showDislikes=$geef->dislikesUitlezen();
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 <!--<script src="js/Feature9-ajax.js"></script> -->
-<script src="js/likes.js"></script>
+<!--<script src="js/likes.js"></script>-->
 
 </body>
 </html>

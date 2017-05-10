@@ -1,5 +1,7 @@
 <?php
 
+include_once ("classes/Db.php");
+
 class User{
     private $m_sFullname;
     private $m_sEmail;
@@ -48,8 +50,8 @@ class User{
     public function Save(){
         //connectie maken (PDO)
         //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
-        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+        //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+        $conn = Db::getInstance();
         //query
         $statement = $conn->prepare("INSERT INTO Users (fullname,email,password) VALUES (:Fullname,:Email,:Password)");
         $statement->bindValue(":Fullname",$this->m_sFullname);
@@ -70,8 +72,8 @@ class User{
             //$target = "images/Posts/avatar" . basename($_FILES['image']['name']);
 
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+           // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+            $conn = Db::getInstance();
             //$image = $_FILES['image']['name'];
             $id = $_SESSION['user_id'];
             $statement=$conn->prepare("SELECT * from Users WHERE ID = $id");
@@ -100,15 +102,15 @@ class User{
 
         if (isset($_SESSION['user_id'])) {
             echo "user al ingelogd";
-            //header("Location: /");
+            header("Location: loggedin.php ");
         }
 
 
 
         if ((!empty($this->m_sEmail)) && (!empty($this->m_sPassword))){
            // $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
-            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+            $conn = Db::getInstance();
 
             $records = $conn->prepare('SELECT id,email,password,fullname,avatar FROM Users WHERE email = :email');
             $records->bindParam(':email', $_POST['email']);

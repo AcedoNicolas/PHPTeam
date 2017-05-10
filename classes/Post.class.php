@@ -1,4 +1,6 @@
 <?php
+include_once ("classes/Db.php");
+
 class Post{
         // feature 5
     function Create(){}
@@ -11,8 +13,8 @@ class Post{
     {
         //connectie maken (PDO)
         //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+        //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+        $conn = Db::getInstance();
         //query
         //$statement = $conn->prepare("SELECT * FROM `images` WHERE text like ':key'");
         $statement = $conn->prepare("SELECT * FROM `images` WHERE ( text like :key) or (eigenaar like :key)or (locatie like :key)");
@@ -49,7 +51,8 @@ class Post{
 
     function Ophalen ($id){
         //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
-        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+        //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+        $conn = Db::getInstance();
         //query
         $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
         $statement->bindValue(':id',$id);
@@ -75,7 +78,9 @@ public function DeletePost()
 {
 // maak connectie
     //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
-    $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+    //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+    $conn = Db::getInstance();
+
 // zoek ik 'images' waar id = id van de post en waar eigenaar = session'fullname'
     $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
     $statement->bindParam(':id',$this->m_iIdpost);

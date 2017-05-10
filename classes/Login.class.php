@@ -1,4 +1,5 @@
 <?php
+include_once ("classes/Db.php");
 
 
 class Login
@@ -16,8 +17,8 @@ class Login
 
         if (!empty($_POST['email']) && !empty($_POST['password'])):
            // $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
-            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
+            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+            $conn = Db::getInstance();
             $records = $conn->prepare('SELECT id,email,password,fullname,avatar FROM Users WHERE email = :email');
             $records->bindParam(':email', $_POST['email']);
             $records->execute();

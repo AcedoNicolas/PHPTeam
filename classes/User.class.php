@@ -47,7 +47,8 @@ class User{
 
     public function Save(){
         //connectie maken (PDO)
-        $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+        //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 
         //query
         $statement = $conn->prepare("INSERT INTO Users (fullname,email,password) VALUES (:Fullname,:Email,:Password)");
@@ -68,7 +69,8 @@ class User{
     public function setAvatar(){
             //$target = "images/Posts/avatar" . basename($_FILES['image']['name']);
 
-            $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 
             //$image = $_FILES['image']['name'];
             $id = $_SESSION['user_id'];
@@ -92,7 +94,44 @@ class User{
 
     }
 
+    public function Trylogin()
+    {
 
+
+        if (isset($_SESSION['user_id'])) {
+            echo "user al ingelogd";
+            //header("Location: /");
+        }
+
+
+
+        if ((!empty($this->m_sEmail)) && (!empty($this->m_sPassword))){
+           // $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
+            $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+
+
+            $records = $conn->prepare('SELECT id,email,password,fullname,avatar FROM Users WHERE email = :email');
+            $records->bindParam(':email', $_POST['email']);
+            $records->execute();
+            $results = $records->fetch(PDO::FETCH_ASSOC);
+
+
+            if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
+
+                $_SESSION['user_id'] = $results['id'];
+                header("Location: loggedin.php");
+                $_SESSION['email'] = $results['email'];
+                $_SESSION['fullname'] = $results['fullname'];
+                $_SESSION['avatar'] = $results['avatar'];
+
+
+            } else {
+                $message = 'Sorry, those credentials do not match';
+            }
+
+    }
+
+    }
 
 
 

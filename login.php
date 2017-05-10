@@ -2,13 +2,11 @@
 session_start();
 include "classes/Login.class.php";
 include_once ("classes/User.class.php");
-if (isset($_POST)) {
 
-}
 
 if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     try {
-        $login = new Login();
+        $login = new User();
         $login->Email = $_POST["email"];
         $login->Password = $_POST["password"];
         $login->Trylogin();

@@ -10,7 +10,8 @@ class Post{
     function Search($zoek)
     {
         //connectie maken (PDO)
-        $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 
         //query
         //$statement = $conn->prepare("SELECT * FROM `images` WHERE text like ':key'");
@@ -47,7 +48,8 @@ class Post{
 
 
     function Ophalen ($id){
-        $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+        //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
         //query
         $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
         $statement->bindValue(':id',$id);
@@ -72,7 +74,8 @@ class Post{
 public function DeletePost()
 {
 // maak connectie
-    $conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+    //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
+    $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 // zoek ik 'images' waar id = id van de post en waar eigenaar = session'fullname'
     $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
     $statement->bindParam(':id',$this->m_iIdpost);
@@ -100,6 +103,28 @@ if ($count = 1){
 }
 }
 
+    function humanTiming ($time)
+    {
+
+        $time = time() - $time; // to get the time since that moment
+        $time = ($time<1)? 1 : $time;
+        $tokens = array (
+            31536000 => 'jaar',
+            2592000 => 'maand',
+            604800 => 'week',
+            86400 => 'dag',
+            3600 => 'uur',
+            60 => 'minuten',
+            1 => 'seconden'
+        );
+
+        foreach ($tokens as $unit => $text) {
+            if ($time < $unit) continue;
+            $numberOfUnits = floor($time / $unit);
+            return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'':'');
+        }
+
+    }
 
 
 }

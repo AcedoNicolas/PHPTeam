@@ -1,4 +1,4 @@
-<?php
+ <?php
 include_once ("classes/Post.class.php");
 include_once ("classes/Comment.class.php");
 session_start();
@@ -48,6 +48,26 @@ if(isset($_POST['Dltbutton2'])){
     }
 }
 
+ $tijd = strtotime("$r[time]");
+ $time = new Post();
+ $verlopentijd = $time->humanTiming($tijd);
+
+// een foto liken
+
+         if ((isset($_POST['like'])) || (isset($_POST['dislike']))){
+                 if (isset($_POST['like'])){
+                     $klik= true;
+                 }if (isset($_POST['dislike'])){
+                     $klik = false;
+                 }
+             $like = new Comment();
+             $feed = $like->likeDoorgeven($klik);
+         }
+//echo $feed;
+ // likes weergeven
+$geef = new Comment();
+$showlikes=$geef->likesUitlezen();
+$showDislikes=$geef->dislikesUitlezen();
 
 ?><!doctype html>
 <html lang="en">
@@ -111,7 +131,25 @@ if(isset($_POST['Dltbutton2'])){
     <h1><?php echo $r['text'];?></h1>
 
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-    <p><?php echo "Geplaatst door: <b>".$r['eigenaar']. "</b> in <b>". $r['locatie']. "</b> om <b>".$r['time']. "</b> uur" ;?></p>
+    <p><?php echo "Geplaatst door: <b>".$r['eigenaar']. "</b> in <b>". $r['locatie']. "</b> : <b>".$verlopentijd. "</b>  geleden" ;?></p>
+    <div id="likes">
+
+        <?php if (isset($showlikes)): ?>
+            <p>Deze foto heeft <?php echo "<b>".$showlikes."</b>" ;?> likes</p>
+        <?php endif; ?>
+
+        <?php if (isset($showDislikes)): ?>
+            <p>Deze foto heeft <?php echo "<b>".$showDislikes."</b>" ;?> Dislikes</p>
+        <?php endif; ?>
+
+        <?php if (isset($feedbackLike)){ echo "<p class='errortext'>".$feedbackLike."</p>";} ;?>
+
+        <form action="" method="post">
+            <p>like de foto nu</p>
+            <input type="submit" id="btnlike" name="like" value="like">
+            <input type="submit" id="btndislike" name="dislike" value="dislike">
+        </form>
+    </div>
     <div>
         <form action="" method="post">
             <input type="submit" value="verwijder deze foto" name="Dltbutton">
@@ -132,6 +170,8 @@ if(isset($_POST['Dltbutton2'])){
     <?php endif; ?>
 
 </div>
+
+
 <div id="commentSection">
 
     <div class="container">
@@ -192,20 +232,17 @@ if(isset($_POST['Dltbutton2'])){
 
 
 <div id="comment">
-    <!--<div commentinfo>
-    <img src="images/avatar.png" alt="avatar">
-    <p>naam eigenaar</p>
-    </div>-->
-
 
 
 
 
 
 <div class="container">
+
     <div class="row">
         <div class="col-md-6">
             <div class="widget-area no-padding blank">
+
                 <div class="status-upload">
                     <form action="" method="post">
                         <textarea placeholder="Vertel wat je van deze afbeelding denkt" id="activitymessage" name="activitymessage" ></textarea>
@@ -222,8 +259,9 @@ if(isset($_POST['Dltbutton2'])){
 
 </div>
 
-<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-<script src="js/Feature9-ajax.js"></script>
--->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+<!--<script src="js/Feature9-ajax.js"></script> -->
+<script src="js/likes.js"></script>
+
 </body>
 </html>

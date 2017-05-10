@@ -7,7 +7,8 @@ if (isset($_POST['upload'])) {
 
     $target = "images/Posts/" . basename($_FILES['image']['name']);
 
-    $conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+    //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+    $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 
     $image = $_FILES['image']['name'];
     $text = $_POST['text'];
@@ -57,7 +58,8 @@ if (isset($_POST['upload'])) {
 </form>
 
 <?php
-$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+//$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 $records = $conn->prepare('SELECT * FROM images');
 $records->execute();
 while($row = $records->fetch(PDO::FETCH_ASSOC) ){

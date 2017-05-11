@@ -1,56 +1,47 @@
 <?php
 session_start();
 include "classes/Login.class.php";
-include_once ("classes/User.class.php");
+include_once("classes/User.class.php");
 
 
-if((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
+if ((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     try {
         $login = new User();
         $login->Email = $_POST["email"];
         $login->Password = $_POST["password"];
         $login->Trylogin();
-
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
-
-}
-else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
-
-    try{
+} elseif ((isset($_POST['BtnRegister']))&&(!empty($_POST))) {
+    try {
         $user = new user();
         $fullnameErr = $emailErr = $passErr = "";
         if (empty($_POST["fullname"])) {
             $fullnameErr = "Full name is required";
-        }
-        else{
+        } else {
             $user->Fullname= $_POST["fullname"];
         }
 
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
-        }
-
-        else{
+        } else {
             $user->Email = $_POST["email"];
         }
 
-        if(empty($_POST['pass'])) {
+        if (empty($_POST['pass'])) {
             $passErr = "password is required";
-        }
-        else{
+        } else {
             $user->Password = $_POST["pass"];
         }
 
 
-        if(empty($fullnameErr || $emailErr || $passErr)){
+        if (empty($fullnameErr || $emailErr || $passErr)) {
             $user->Save();
             header("Location: loggedin.php");
             //$succes = "the user has been saved.";
         }
-    }
-    catch (Exception $e){
+    } catch (Exception $e) {
         $error= $e->getMessage();
     }
 }
@@ -122,18 +113,24 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
             <form action="" method="post" id="RegisterForm">
 
                 <label for="fullname">Jouw naam</label>
-                <p class="MsgError"><?php if(!empty($fullnameErr)){ echo $fullnameErr;} ?></p>
+                <p class="MsgError"><?php if (!empty($fullnameErr)) {
+    echo $fullnameErr;
+} ?></p>
                 <input type="text" id="fullname" name="fullname" class="form-control" placeholder="volledige naam">
 
 
                 <label for="email">email</label>
-                <p class="MsgError"><?php if(!empty($emailErr)){ echo $emailErr;}; ?></p>
+                <p class="MsgError"><?php if (!empty($emailErr)) {
+    echo $emailErr;
+}; ?></p>
 
                 <input type="text" name="email" id="email" class="form-control" placeholder="email">
 
 
                 <label for="pass">wachtwoord</label>
-                <p class="MsgError"><?php if(!empty($passErr)){ echo $passErr;} ?></p>
+                <p class="MsgError"><?php if (!empty($passErr)) {
+    echo $passErr;
+} ?></p>
 
                 <input type="password" name="pass" id="pass" class="form-control" placeholder="wachtwoord">
 
@@ -145,7 +142,7 @@ else if ((isset($_POST['BtnRegister']))&&(!empty($_POST))){
         </div>
         
          <!-- alert boodschap -->
-        <?php if(isset($error)):?>
+        <?php if (isset($error)):?>
             <div class="alert alert-danger error" role="alert"><?php echo $error; ?></div>
         <?php endif; ?>
 

@@ -16,8 +16,7 @@ if (isset($_POST['like'])) {
             "message" => htmlspecialchars($_POST['like'])
 
         ];
-    }catch (Exception $e)
-    {
+    } catch (Exception $e) {
         $error = $e->getMessage();
         $feedback = [
             "code" => 500,

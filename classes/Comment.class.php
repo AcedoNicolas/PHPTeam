@@ -1,5 +1,5 @@
 <?php
-include_once ("classes/Db.php");
+include_once("classes/Db.php");
 
 /**
  * Created by PhpStorm.
@@ -7,7 +7,7 @@ include_once ("classes/Db.php");
  * Date: 29/04/17
  * Time: 12:49
  */
-Class Comment
+class Comment
 {
     private $m_sText;
     private $m_iidUser;
@@ -43,8 +43,6 @@ Class Comment
                 return $this->m_iidPost;
                 break;
         }
-
-
     }
 
     public function SavePost()
@@ -62,62 +60,61 @@ Class Comment
     }
 
 
-        public function GetRecentActivities()
-        {
+    public function GetRecentActivities()
+    {
 
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
            // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $this->m_iidPost");
-            $statement->execute();
+        $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $this->m_iidPost");
+        $statement->execute();
 
-            $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                return $row;
-                    }
+        return $row;
+    }
 
-        public function GegevensOphalen($id)
-        {
-            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+    public function GegevensOphalen($id)
+    {
+        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT ID,fullname, avatar FROM `Users` WHERE id = $id");
-            $statement->execute();
+        $statement = $conn->prepare("SELECT ID,fullname, avatar FROM `Users` WHERE id = $id");
+        $statement->execute();
 
-            $row = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $row;
-
-        }
-
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
 
 
-        public function likeDoorgeven ($klik)
-        {
-            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
+
+    public function likeDoorgeven($klik)
+    {
+        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `likes` WHERE idUser = :User AND idPost = :Post");
-            $statement->bindValue(':User', $this->m_iidUser);
-            $statement->bindValue(':Post', $this->m_iidPost);
-            $statement->execute();
-            $rij = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $aantal = $statement->rowCount();
+        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idUser = :User AND idPost = :Post");
+        $statement->bindValue(':User', $this->m_iidUser);
+        $statement->bindValue(':Post', $this->m_iidPost);
+        $statement->execute();
+        $rij = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $aantal = $statement->rowCount();
 
 
 
-            $likenstm = $conn->prepare("INSERT INTO likes (actie, idUser, idPost) VALUES (:like, :User, :Post)");
-            $likenstm->bindValue(':like', $klik);
-            $likenstm->bindValue(':User', $this->m_iidUser);
-            $likenstm->bindValue(':Post', $this->m_iidPost);
+        $likenstm = $conn->prepare("INSERT INTO likes (actie, idUser, idPost) VALUES (:like, :User, :Post)");
+        $likenstm->bindValue(':like', $klik);
+        $likenstm->bindValue(':User', $this->m_iidUser);
+        $likenstm->bindValue(':Post', $this->m_iidPost);
 //var_dump($rij);
-            if ($aantal > 0){
+            if ($aantal > 0) {
 
 
 
                 // if ingevoerde = O
                 // je mag liken maar dislike wordt verwijderd
-                if ($rij[0]['actie']== 0){
+                if ($rij[0]['actie']== 0) {
                     $likenstm->execute();
 
                     $verwijder = $conn->prepare("DELETE FROM `likes` WHERE `id` = :id AND 'actie'=0");
@@ -127,24 +124,16 @@ Class Comment
                     // if ingevoerde = 1
                     // je mag disliken, maar like wordt verwijderd
                 }
-                if($rij[0]['actie']== 1){
+                if ($rij[0]['actie']== 1) {
                     $likenstm->execute();
 
                     $verwijder = $conn->prepare("DELETE FROM `likes` WHERE `id` = :id AND 'actie'=0");
                     $verwijder->bindValue(':id', $rij[0]['id']);
                     $verwijder->execute();
-
                 }
-                    return $a='je mag maar 1 keer liken';
-
-
-
-
-            }else{
-
-
+                return $a='je mag maar 1 keer liken';
+            } else {
                 $likenstm->execute();
-
             }
 
             // mag liken
@@ -167,35 +156,29 @@ Class Comment
 
             }
 */
-
-        }
-        public function likesUitlezen(){
-            $idPost = $_GET['nr'];
+    }
+    public function likesUitlezen()
+    {
+        $idPost = $_GET['nr'];
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 1");
-            $statement->execute();
+        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 1");
+        $statement->execute();
 
-            $row = $statement->rowCount();
-            return $row;
-
-
-
-
-        }
-        public function dislikesUitlezen(){
-
-            $idPost = $_GET['nr'];
+        $row = $statement->rowCount();
+        return $row;
+    }
+    public function dislikesUitlezen()
+    {
+        $idPost = $_GET['nr'];
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 0");
-            $statement->execute();
+        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 0");
+        $statement->execute();
 
-            $row = $statement->rowCount();
-            return $row;
-
-        }
-
+        $row = $statement->rowCount();
+        return $row;
+    }
 }

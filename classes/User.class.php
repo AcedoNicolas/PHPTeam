@@ -1,15 +1,17 @@
 <?php
 
-include_once ("classes/Db.php");
+include_once("classes/Db.php");
 
-class User{
+class User
+{
     private $m_sFullname;
     private $m_sEmail;
     private $m_sPassword;
 
 
-    public function __set($p_sProporty,$p_vValue){
-        switch ($p_sProporty){
+    public function __set($p_sProporty, $p_vValue)
+    {
+        switch ($p_sProporty) {
             case "Fullname":
                 $this->m_sFullname = $p_vValue;
                 break;
@@ -28,8 +30,9 @@ class User{
         }
     }
 
-    public function __get($p_sProporty){
-        switch ($p_sProporty){
+    public function __get($p_sProporty)
+    {
+        switch ($p_sProporty) {
             case "Fullname":
                 return $this->m_sFullname;
                 break;
@@ -43,20 +46,19 @@ class User{
                 break;
 
         }
-
-
     }
 
-    public function Save(){
+    public function Save()
+    {
         //connectie maken (PDO)
         //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
         //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
         $conn = Db::getInstance();
         //query
         $statement = $conn->prepare("INSERT INTO Users (fullname,email,password) VALUES (:Fullname,:Email,:Password)");
-        $statement->bindValue(":Fullname",$this->m_sFullname);
-        $statement->bindValue(":Email",$this->m_sEmail);
-        $statement->bindValue(":Password",$this->m_sPassword);
+        $statement->bindValue(":Fullname", $this->m_sFullname);
+        $statement->bindValue(":Email", $this->m_sEmail);
+        $statement->bindValue(":Password", $this->m_sPassword);
 
 
 
@@ -65,18 +67,18 @@ class User{
 
         //fail of pass?
         return($res);
-
     }
 
-    public function setAvatar(){
-            //$target = "images/Posts/avatar" . basename($_FILES['image']['name']);
+    public function setAvatar()
+    {
+        //$target = "images/Posts/avatar" . basename($_FILES['image']['name']);
 
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
            // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
             //$image = $_FILES['image']['name'];
             $id = $_SESSION['user_id'];
-            $statement=$conn->prepare("SELECT * from Users WHERE ID = $id");
+        $statement=$conn->prepare("SELECT * from Users WHERE ID = $id");
             //$res=$statement->execute();
 
 
@@ -91,15 +93,10 @@ class User{
 
 
                 }*/
-
-
-
     }
 
     public function Trylogin()
     {
-
-
         if (isset($_SESSION['user_id'])) {
             echo "user al ingelogd";
             header("Location: loggedin.php ");
@@ -107,8 +104,8 @@ class User{
 
 
 
-        if ((!empty($this->m_sEmail)) && (!empty($this->m_sPassword))){
-           // $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
+        if ((!empty($this->m_sEmail)) && (!empty($this->m_sPassword))) {
+            // $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
 
@@ -119,22 +116,14 @@ class User{
 
 
             if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-
                 $_SESSION['user_id'] = $results['id'];
                 header("Location: loggedin.php");
                 $_SESSION['email'] = $results['email'];
                 $_SESSION['fullname'] = $results['fullname'];
                 $_SESSION['avatar'] = $results['avatar'];
-
-
             } else {
                 $message = 'Sorry, those credentials do not match';
             }
-
+        }
     }
-
-    }
-
-
-
 }

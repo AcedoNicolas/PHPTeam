@@ -4,4 +4,3 @@ session_destroy();
 header("location: login.php");
 //echo 'You have been logged out. <a href="login.php">Go back</a>';
 exit();
-?>

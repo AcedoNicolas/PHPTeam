@@ -1,5 +1,5 @@
 <?php
-include_once ("classes/Db.php");
+include_once("classes/Db.php");
 
 class Upload
 {
@@ -13,7 +13,6 @@ class Upload
         //var_dump($eigenaar);
 
         if (isset($_POST['upload'])) {
-
             $target = "images/Posts/" . basename($_FILES['image']['name']);
 
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
@@ -35,16 +34,9 @@ class Upload
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
                 $msg = "Gelukt!";
-
             } else {
                 $msg = "Probeer opnieuw!";
             }
-
-
-
         }
-
     }
 }
-
-?>

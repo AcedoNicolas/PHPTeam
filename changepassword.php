@@ -1,14 +1,14 @@
 <?php
 session_start();
-include ("classes/User.class.php");
+include("classes/User.class.php");
 $user = $_SESSION['email'];
-if ($user){
-    if($_POST['submit']){
-    $oldpassword = ($_POST['oldpassword']);
-    $newpassword = ($_POST['newpassword']);
-    $repeatnewpassword = ($_POST['repeatnewpassword']);
+if ($user) {
+    if ($_POST['submit']) {
+        $oldpassword = ($_POST['oldpassword']);
+        $newpassword = ($_POST['newpassword']);
+        $repeatnewpassword = ($_POST['repeatnewpassword']);
 
-        $conn= new PDO("mysql:host=localhost;dbname=imdterest","root","");
+        $conn= new PDO("mysql:host=localhost;dbname=imdterest", "root", "");
 
         $records = $conn->prepare('SELECT password FROM Users WHERE email = :email');
         $records->bindParam(':email', $_POST['email']);
@@ -16,27 +16,22 @@ if ($user){
         $results = $records->fetch(PDO::FETCH_ASSOC);
 
         if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-
-
-
         } else {
             $message = 'Sorry, those credentials do not match';
         }
-
-    }
-    else{
-
-    echo"  <form action='changepassword.php' method='POST'>
+    } else {
+        echo"  <form action='changepassword.php' method='POST'>
         old password: <input type='text' name='oldpassword'><p>
         New password: <input type ='password' name ='newpassword'><br>
         Repeat New password: <input type ='password' name ='repeatnewpassword'><br>
         <input type='submit' name='submit' value='Change password'>
 </p>
 </form>
-    ";}
-}
-else
+    ";
+    }
+} else {
     die("Je moet ingelogd zijn om je passwoord te veranderen.");
+}
 
 
 ?>
@@ -89,7 +84,7 @@ else
     </div>
 
     <!-- alert boodschap -->
-    <?php if(isset($error)):?>
+    <?php if (isset($error)):?>
         <div class="alert alert-danger error" role="alert"><?php echo $error; ?></div>
     <?php endif; ?>
 

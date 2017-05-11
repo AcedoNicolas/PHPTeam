@@ -1,15 +1,18 @@
 <?php
-include_once ("classes/Db.php");
+include_once("classes/Db.php");
 
-class Post{
-        // feature 5
-    function Create(){}
+class Post
+{
+    // feature 5
+    public function Create()
+    {
+    }
 
 
 
 
         // feature 7
-    function Search($zoek)
+    public function Search($zoek)
     {
         //connectie maken (PDO)
         //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
@@ -36,8 +39,7 @@ class Post{
                 $this->data[] = $row;
             }
             return $this->data;
-
-        }else {
+        } else {
             //$msg = "We hebben helaas niets gevonden";
             echo 'We hebben helaas niets gevonden';
             //return $msg;
@@ -49,19 +51,19 @@ class Post{
 
 
 
-    function Ophalen ($id){
+    public function Ophalen($id)
+    {
         //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
         //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
         $conn = Db::getInstance();
         //query
         $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
-        $statement->bindValue(':id',$id);
+        $statement->bindValue(':id', $id);
         //query starten
        $statement->execute();
-       $row = $statement->fetch();
+        $row = $statement->fetch();
         //var_dump($row);
         return $row;
-
     }
 
 
@@ -74,46 +76,45 @@ class Post{
     public $m_iIdpost;
     public $m_sGebruiker;
 
-public function DeletePost()
-{
-// maak connectie
+    public function DeletePost()
+    {
+        // maak connectie
     //$conn= new PDO("mysql:host=localhost;dbname=IMDterest","root","");
     //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
     $conn = Db::getInstance();
 
 // zoek ik 'images' waar id = id van de post en waar eigenaar = session'fullname'
     $statement = $conn->prepare("SELECT * FROM `images` WHERE id = :id");
-    $statement->bindParam(':id',$this->m_iIdpost);
-    $statement->execute();
-    $res = $statement->fetch();
+        $statement->bindParam(':id', $this->m_iIdpost);
+        $statement->execute();
+        $res = $statement->fetch();
 
-$count = $statement->rowCount();
+        $count = $statement->rowCount();
 // als row count = 1
-if ($count = 1){
-    if ($res['eigenaar'] == $this->m_sGebruiker){
+if ($count = 1) {
+    if ($res['eigenaar'] == $this->m_sGebruiker) {
         // dan verwijder
         // querry maken 'delete'
         //execute om te verwijderen
         $statement = $conn->prepare("DELETE FROM `images` WHERE id = '$this->m_iIdpost'");
         $msg=$statement->execute();
         return $msg;
-    }else{
+    } else {
         $msg = "De foto is niet van jou, je kan hem niet wissen";
         return $msg;
     }
     // else = niet verwijderen (message tonen)
-}else{
+} else {
     $msg= " Er is een fout opgetreden, kan de foto niet wissen";
     return $msg;
 }
-}
+    }
 
-    function humanTiming ($time)
+    public function humanTiming($time)
     {
-
         $time = time() - $time; // to get the time since that moment
         $time = ($time<1)? 1 : $time;
-        $tokens = array (
+        $tokens = array(
             31536000 => 'jaar',
             2592000 => 'maand',
             604800 => 'week',
@@ -124,12 +125,11 @@ if ($count = 1){
         );
 
         foreach ($tokens as $unit => $text) {
-            if ($time < $unit) continue;
+            if ($time < $unit) {
+                continue;
+            }
             $numberOfUnits = floor($time / $unit);
             return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'':'');
         }
-
     }
-
-
 }

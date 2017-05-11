@@ -1,16 +1,15 @@
  <?php
          echo phpversion();
-include_once ("classes/Post.class.php");
-include_once ("classes/Comment.class.php");
+include_once("classes/Post.class.php");
+include_once("classes/Comment.class.php");
 session_start();
 
 /* post ophalen en laten zien */
-if ((isset($_GET['nr']))&&(!empty($_GET['nr']))){
+if ((isset($_GET['nr']))&&(!empty($_GET['nr']))) {
     $detail = new Post();
     $postID = $_GET['nr'];
     $r=$detail->Ophalen($postID);
-}
-else{
+} else {
     header("location:loggedin.php");
 }
 
@@ -18,18 +17,14 @@ else{
 $activity = new Comment();
 
 //controleer of er een update wordt verzonden
-if(!empty($_POST['activitymessage']))
-{
+if (!empty($_POST['activitymessage'])) {
     $activity->Text = $_POST['activitymessage'];
-    try
-    {
+    try {
         //$comm = $_POST['activitymessage'];
         $activity->idPost = $_GET['nr'];
         $activity->idUser = $_SESSION['user_id'];
         $activity->SavePost();
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
         $feedback = $e->getMessage();
     }
 }
@@ -40,15 +35,15 @@ $recentActivities = $activity->GetRecentActivities();
 
 
 // foto verwijderen
-if(isset($_POST['Dltbutton2'])){
+if (isset($_POST['Dltbutton2'])) {
     $Del = new Post();
     $Del->m_iIdpost = $_GET['nr'];
     $Del->m_sGebruiker = $_SESSION['fullname'];
     $res2 = $Del->DeletePost();
-    if ($res2 === true){
+    if ($res2 === true) {
         $feedback = "de foto is goed verwijderd";
         header('location: post.php');
-    }else{
+    } else {
         $feedback = $res2;
     }
 }
@@ -58,16 +53,16 @@ if(isset($_POST['Dltbutton2'])){
  $verlopentijd = $time->humanTiming($tijd);
 
 // een foto liken
-         if ((isset($_POST['like'])) || (isset($_POST['dislike']))){
-
-                 if (isset($_POST['like'])){
-                     $klik= true;
-                 }if (isset($_POST['dislike'])){
-                     $klik = false;
-                 }
+         if ((isset($_POST['like'])) || (isset($_POST['dislike']))) {
+             if (isset($_POST['like'])) {
+                 $klik= true;
+             }
+             if (isset($_POST['dislike'])) {
+                 $klik = false;
+             }
              $like = new Comment();
-                 $like->idUser = $_SESSION['user_id'];
-                 $like->idPost = $_GET['nr'];
+             $like->idUser = $_SESSION['user_id'];
+             $like->idPost = $_GET['nr'];
              $feed = $like->likeDoorgeven($klik);
          }
 
@@ -122,11 +117,11 @@ $showDislikes=$geef->dislikesUitlezen();
     </nav>
 
     <!-- post van de gevonden resultaten -->
-    <?php if (!empty($res)): foreach($res as  $r): ?>
+    <?php if (!empty($res)): foreach ($res as  $r): ?>
         <a href="post.php?nr=<?php echo $r['id'] ; ?>">
             <div id="post">
                 <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-                <p><? echo $r['text'];?></p>
+                <p><?php echo $r['text'];?></p>
             </div>
         </a>
     <?php endforeach; endif; ?>
@@ -149,7 +144,9 @@ $showDislikes=$geef->dislikesUitlezen();
             <p>Deze foto heeft <?php echo "<b>".$showDislikes."</b>" ;?> Dislikes</p>
         <?php endif; ?>
 
-        <?php if (isset($feed)){ echo "<p class='errorText'>".$feed."</p>";} ;?>
+        <?php if (isset($feed)) {
+    echo "<p class='errorText'>".$feed."</p>";
+} ;?>
 
         <form action="" method="post">
             <p>like de foto nu</p>
@@ -161,7 +158,9 @@ $showDislikes=$geef->dislikesUitlezen();
         <form action="" method="post">
             <input type="submit" value="verwijder deze foto" name="Dltbutton">
         </form>
-        <p class="errorText"><?php if (isset($feedback)){echo $feedback;} ;?></p>
+        <p class="errorText"><?php if (isset($feedback)) {
+    echo $feedback;
+} ;?></p>
     </div>
 
     <!-- weet je zeker dat je dit wilt verwijderen -->
@@ -188,9 +187,9 @@ $showDislikes=$geef->dislikesUitlezen();
                 <section class="comment-list">
                     <!-- First Comment -->
 
-                    <?php if(count($recentActivities) > 0): ?>
+                    <?php if (count($recentActivities) > 0): ?>
 
-                    <?php foreach($recentActivities as $key=>$singleActivity):?>
+                    <?php foreach ($recentActivities as $key=>$singleActivity):?>
 
                     <?php   $commentGeg = new Comment();
                             //$commentGeg->idUser= $singleActivity['idUser'];

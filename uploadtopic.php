@@ -18,15 +18,11 @@ if (isset($_POST['upload'])) {
     $statement->bindValue(":text", $text);
     $res = $statement->execute();
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
         $msg="Gelukt!";
-
-    }
-    else{
+    } else {
         $msg = "Probeer opnieuw!";
     }
-
-
 }
 
 ?>
@@ -62,7 +58,7 @@ if (isset($_POST['upload'])) {
 $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
 $records = $conn->prepare('SELECT * FROM images');
 $records->execute();
-while($row = $records->fetch(PDO::FETCH_ASSOC) ){
+while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
     echo "<div id='postGroot'>";
     echo "<img src='images/Posts/".$row['image']."'>";
     echo "<p>".$row['text']."</p>";

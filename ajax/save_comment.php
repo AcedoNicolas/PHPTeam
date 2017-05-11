@@ -6,14 +6,12 @@ include_once("../classes/Comment.class.php");
 $activity = new Comment();
 
 //controleer of er een update wordt verzonden
-if(!empty($_POST['activitymessage']))
-{
+if (!empty($_POST['activitymessage'])) {
     $activity->Text = $_POST['activitymessage'];
     $activity->idPost = $_GET['nr'];
     $activity->idUser = $_SESSION['user_id'];
 
-    try
-    {
+    try {
         $activity->SavePost();
         $feedback = [
             "code" => 200,
@@ -21,9 +19,7 @@ if(!empty($_POST['activitymessage']))
             "message" => "het werkt"
 
         ];
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
         $error = $e->getMessage();
         $feedback = [
             "code" => 500,
@@ -35,4 +31,3 @@ if(!empty($_POST['activitymessage']))
     // json_encode is om de array terug te sturen naar javascript {code = .., message = ..}
     echo json_encode($feedback);
 }
-?>

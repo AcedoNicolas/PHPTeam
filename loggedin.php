@@ -1,8 +1,8 @@
 <?php
-include_once ("classes/User.class.php");
-include_once ("classes/Post.class.php");
-include_once ("classes/Upload.class.php");
-include_once ("classes/Db.php");
+include_once("classes/User.class.php");
+include_once("classes/Post.class.php");
+include_once("classes/Upload.class.php");
+include_once("classes/Db.php");
 
 session_start();
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.
@@ -18,22 +18,20 @@ session_start();
     // redirect naar login.php
 
 
- if ((isset($_GET['zoek'])) && (!empty($_GET['zoek']))){
+ if ((isset($_GET['zoek'])) && (!empty($_GET['zoek']))) {
      $zoekopdracht = $_GET['zoek'];
 
      $search = new Post();
      $res = $search->Search($zoekopdracht);
-      }
+ }
 
-if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))){
-     $g = new User();
+if ((isset($_POST['avatar'])) && (!empty($_POST['avatar']))) {
+    $g = new User();
      //$g->setAvatar();
 }
 
-if((isset($_POST['upload']))&&(!empty($_POST))) {
+if ((isset($_POST['upload']))&&(!empty($_POST))) {
     try {
-
-
         $upload = new upload();
         $upload->image = $_FILES['image']['name'];
         $upload->text = $_POST['text'];
@@ -160,14 +158,16 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
             </div>
         </div>
 
-        <h2><?php if (isset($feedback)){echo $feedback;} ?></h2>
+        <h2><?php if (isset($feedback)) {
+    echo $feedback;
+} ?></h2>
 
 <!-- post van de gevonden resultaten -->
-<?php if (!empty($res)): foreach($res as  $r): ?>
+<?php if (!empty($res)): foreach ($res as  $r): ?>
     <a href="post.php?nr=<?php echo $r['id'] ; ?>">
     <div id="post" class="ThumbPost">
         <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-        <p><? echo $r['text'];?></p>
+        <p><?php echo $r['text'];?></p>
     </div>
     </a>
 <?php endforeach; endif; echo "<hr>"; ?>
@@ -210,7 +210,7 @@ if((isset($_POST['upload']))&&(!empty($_POST))) {
       <div class="container">
           <h1> Hallo,
           <?php
-          if (isset($_SESSION['fullname'])){
+          if (isset($_SESSION['fullname'])) {
               echo $_SESSION['fullname'];
           }
           ?>

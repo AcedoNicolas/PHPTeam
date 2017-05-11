@@ -1,4 +1,5 @@
  <?php
+         echo phpversion();
 include_once ("classes/Post.class.php");
 include_once ("classes/Comment.class.php");
 session_start();
@@ -23,6 +24,8 @@ if(!empty($_POST['activitymessage']))
     try
     {
         //$comm = $_POST['activitymessage'];
+        $activity->idPost = $_GET['nr'];
+        $activity->idUser = $_SESSION['user_id'];
         $activity->SavePost();
     }
     catch (Exception $e)
@@ -31,7 +34,9 @@ if(!empty($_POST['activitymessage']))
     }
 }
 //altijd alle laatste comments ophalen
+ $activity->idPost = $_GET['nr'];
 $recentActivities = $activity->GetRecentActivities();
+//var_dump($recentActivities);
 
 
 // foto verwijderen
@@ -187,10 +192,14 @@ $showDislikes=$geef->dislikesUitlezen();
 
                     <?php foreach($recentActivities as $key=>$singleActivity):?>
 
-                    <?php   $commentGeg = new comment();
-                            $userID = $singleActivity['idUser'];
-                            $persoon=$commentGeg->GegevensOphalen($userID);
-                    ?>
+                    <?php   $commentGeg = new Comment();
+                            //$commentGeg->idUser= $singleActivity['idUser'];
+                            $persoonID=$singleActivity['idUser'];
+
+                            //var_dump($singleActivity['idUser']);
+
+                            $persoon=$commentGeg->GegevensOphalen($persoonID);
+                            ?>
 
                     <article class="row">
                         <div class="col-md-2 col-sm-2 hidden-xs">
@@ -231,15 +240,17 @@ $showDislikes=$geef->dislikesUitlezen();
         </div>
     </div>
 </div>
+<ul id="listupdates">
+
+        <li>Waiting for first status update</li>
+
+
+</ul>
+
 
 
 <div id="comment">
-
-
-
-
-
-<div class="container">
+    <div class="container">
 
     <div class="row">
         <div class="col-md-6">
@@ -262,7 +273,7 @@ $showDislikes=$geef->dislikesUitlezen();
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-<!--<script src="js/Feature9-ajax.js"></script> -->
+<script src="js/Feature9-ajax.js"></script>
 <!--<script src="js/likes.js"></script>-->
 
 </body>

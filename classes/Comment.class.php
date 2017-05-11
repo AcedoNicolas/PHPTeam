@@ -76,12 +76,12 @@ Class Comment
                 return $row;
                     }
 
-        public function GegevensOphalen()
+        public function GegevensOphalen($id)
         {
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT id,fullname, avatar FROM `Users` WHERE id = $this->m_iidPost");
+            $statement = $conn->prepare("SELECT ID,fullname, avatar FROM `Users` WHERE id = $id");
             $statement->execute();
 
             $row = $statement->fetchAll(PDO::FETCH_ASSOC);

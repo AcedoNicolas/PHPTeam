@@ -1,7 +1,11 @@
  <?php
-         echo phpversion();
-include_once("classes/Post.class.php");
-include_once("classes/Comment.class.php");
+ spl_autoload_register(function ($class) {
+     include_once("classes/" . $class . ".class.php");
+ });
+
+
+//include_once("classes/Post.class.php");
+//include_once("classes/Comment.class.php");
 session_start();
 
 /* post ophalen en laten zien */

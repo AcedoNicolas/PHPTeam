@@ -1,8 +1,12 @@
 <?php
-include_once("classes/User.class.php");
+spl_autoload_register(function ($class) {
+    include_once("classes/" . $class . ".class.php");
+});
+
+/*include_once("classes/User.class.php");
 include_once("classes/Post.class.php");
 include_once("classes/Upload.class.php");
-include_once("classes/Db.php");
+include_once("classes/Db.class.php");*/
 
 session_start();
 // nu kan je nog zonder passwoord naar de deze pagina komen. mag niet.

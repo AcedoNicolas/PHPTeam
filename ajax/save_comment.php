@@ -3,6 +3,7 @@
 header('Content-Type: application/json');
 
 include_once("../classes/Comment.class.php");
+//include_once("../classes/Db.class.php");
 $activity = new Comment();
 
 //controleer of er een update wordt verzonden
@@ -15,8 +16,8 @@ if (!empty($_POST['activitymessage'])) {
         $activity->SavePost();
         $feedback = [
             "code" => 200,
-           // "message" => htmlspecialchars($_POST['activitymessage'])
-            "message" => "het werkt"
+            "message" => htmlspecialchars($_POST['activitymessage'])
+           //"message" => $_GET['nr']
 
         ];
     } catch (Exception $e) {

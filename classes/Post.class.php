@@ -1,5 +1,5 @@
 <?php
-include_once("classes/Db.php");
+//include_once("Db.class.php");
 
 class Post
 {

@@ -1,7 +1,5 @@
 <?php
 
-include_once("classes/Db.php");
-
 class User
 {
     private $m_sFullname;

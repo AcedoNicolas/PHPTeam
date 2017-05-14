@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
  * Created by PhpStorm.
  * User: jorisdelvaux
@@ -19,7 +16,7 @@ class Comment
     {
         switch ($p_sProperty) {
             case "Text":
-                $this->m_sText = $p_vValue;
+                $this->m_sText = htmlspecialchars($p_vValue);
                 break;
             case "idUser":
                 $this->m_iidUser  = $p_vValue;
@@ -67,7 +64,7 @@ class Comment
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
            // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $this->m_iidPost");
+        $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $this->m_iidPost ORDER BY `id` DESC ");
         $statement->execute();
 
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -92,8 +89,6 @@ class Comment
     public function likeDoorgeven($klik)
     {
         //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
-
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM `likes` WHERE idUser = :User AND idPost = :Post");
         $statement->bindValue(':User', $this->m_iidUser);
@@ -108,11 +103,8 @@ class Comment
         $likenstm->bindValue(':like', $klik);
         $likenstm->bindValue(':User', $this->m_iidUser);
         $likenstm->bindValue(':Post', $this->m_iidPost);
-//var_dump($rij);
+// selectie if else zal niet helemaal juist zijn ? want er komt soms  return a teveel.
             if ($aantal > 0) {
-
-
-
                 // if ingevoerde = O
                 // je mag liken maar dislike wordt verwijderd
                 if ($rij[0]['actie']== 0) {
@@ -132,39 +124,19 @@ class Comment
                     $verwijder->bindValue(':id', $rij[0]['id']);
                     $verwijder->execute();
                 }
-                return $a='je mag maar 1 keer liken';
+                    return $a = 'je mag maar 1 keer liken';
+
             } else {
                 $likenstm->execute();
             }
-
-            // mag liken
-
-
-
-
-
-            // mag enkel disliken
-
-/*
-            if ($_SESSION['like'] == $_SESSION['user_id'] . "-" . $_GET['nr']."-".$klik) {
-
-            $feedbackLike = "je kaan maar 1 keer liken";
-            return $feedbackLike;
-        }
-            else{
-                $statement->execute();
-                $_SESSION['like'] = $_SESSION['user_id'] . "-" . $_GET['nr']."-".$klik;
-
-            }
-*/
     }
     public function likesUitlezen()
     {
-        $idPost = $_GET['nr'];
+        //$idPost = $_GET['nr'];
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 1");
+        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $this->m_iidPost AND actie = 1");
         $statement->execute();
 
         $row = $statement->rowCount();
@@ -172,11 +144,11 @@ class Comment
     }
     public function dislikesUitlezen()
     {
-        $idPost = $_GET['nr'];
+        //$idPost = $_GET['nr'];
             //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $idPost AND actie = 0");
+        $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost =$this->m_iidPost AND actie = 0");
         $statement->execute();
 
         $row = $statement->rowCount();

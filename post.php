@@ -3,11 +3,8 @@
      include_once("classes/" . $class . ".class.php");
  });
 
-
-//include_once("classes/Post.class.php");
-//include_once("classes/Comment.class.php");
 session_start();
-
+$_SESSION['post_id']= $_GET['nr'];
 /* post ophalen en laten zien */
 if ((isset($_GET['nr']))&&(!empty($_GET['nr']))) {
     $detail = new Post();
@@ -24,7 +21,6 @@ $activity = new Comment();
 if (!empty($_POST['activitymessage'])) {
     $activity->Text = $_POST['activitymessage'];
     try {
-        //$comm = $_POST['activitymessage'];
         $activity->idPost = $_GET['nr'];
         $activity->idUser = $_SESSION['user_id'];
         $activity->SavePost();
@@ -71,8 +67,9 @@ if (isset($_POST['Dltbutton2'])) {
          }
 
  // likes weergeven
-$geef = new Comment();
-$showlikes=$geef->likesUitlezen();
+ $geef = new Comment();
+ $geef->idPost = $_GET['nr'];
+ $showlikes=$geef->likesUitlezen();
 $showDislikes=$geef->dislikesUitlezen();
 
 ?><!doctype html>
@@ -141,19 +138,18 @@ $showDislikes=$geef->dislikesUitlezen();
     <div id="likes">
 
         <?php if (isset($showlikes)): ?>
-            <p>Deze foto heeft <?php echo "<b>".$showlikes."</b>" ;?> likes</p>
+            <p>Deze foto heeft <?php echo "<b id=\"setLikes\" >".$showlikes."</b>" ;?> likes</p>
         <?php endif; ?>
 
         <?php if (isset($showDislikes)): ?>
-            <p>Deze foto heeft <?php echo "<b>".$showDislikes."</b>" ;?> Dislikes</p>
+            <p>Deze foto heeft <?php echo "<b id=\"setDislikes\">".$showDislikes."</b>" ;?> Dislikes</p>
         <?php endif; ?>
 
-        <?php if (isset($feed)) {
-    echo "<p class='errorText'>".$feed."</p>";
-} ;?>
+
+    <p id="LikeFeed" class='errorText'><?php if (isset($feed)) { echo $feed;} ;?></p>
+
 
         <form action="" method="post">
-            <p>like de foto nu</p>
             <input type="submit" id="btnlike" name="like" value="like">
             <input type="submit" id="btndislike" name="dislike" value="dislike">
         </form>
@@ -182,6 +178,31 @@ $showDislikes=$geef->dislikesUitlezen();
 </div>
 
 
+
+<div id="comment">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="widget-area no-padding blank">
+
+                    <div class="status-upload">
+                        <form action="" method="post" id="commentF">
+                            <textarea placeholder="Vertel wat je van deze afbeelding denkt" id="activitymessage" name="activitymessage" ></textarea>
+
+                            <input type="submit" class="btn btn-success green" value="comment" id="btnSubmit"><i class="fa fa-share"></i>
+                        </form>
+                    </div><!-- Status Upload  -->
+                </div><!-- Widget Area -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
 <div id="commentSection">
 
     <div class="container">
@@ -203,8 +224,8 @@ $showDislikes=$geef->dislikesUitlezen();
 
                             $persoon=$commentGeg->GegevensOphalen($persoonID);
                             ?>
-
-                    <article class="row">
+                        <div id="listupdates">
+                    <article class="row" >
                         <div class="col-md-2 col-sm-2 hidden-xs">
                             <figure class="thumbnail">
                                 <img class="img-responsive" src="<?php echo $persoon[0]['avatar']; ?>" />
@@ -214,9 +235,6 @@ $showDislikes=$geef->dislikesUitlezen();
                         <div class="col-md-10 col-sm-10">
                             <div class="panel panel-default arrow left">
                                 <div class="panel-body">
-                                    <!--<header class="text-left">
-                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                    </header> -->
                                     <div class="comment-post">
                                         <p>
                                             <?php echo $singleActivity['comment_des'] ;?>
@@ -228,6 +246,7 @@ $showDislikes=$geef->dislikesUitlezen();
                             </div>
                         </div>
                     </article>
+                        </div>
 
                         <?php endforeach; ?>
 
@@ -243,41 +262,11 @@ $showDislikes=$geef->dislikesUitlezen();
         </div>
     </div>
 </div>
-<ul id="listupdates">
-
-        <li>Waiting for first status update</li>
-
-
-</ul>
-
-
-
-<div id="comment">
-    <div class="container">
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="widget-area no-padding blank">
-
-                <div class="status-upload">
-                    <form action="" method="post">
-                        <textarea placeholder="Vertel wat je van deze afbeelding denkt" id="activitymessage" name="activitymessage" ></textarea>
-
-                        <input type="submit" class="btn btn-success green" value="comment" id="btnSubmit"><i class="fa fa-share"></i>
-                    </form>
-                </div><!-- Status Upload  -->
-            </div><!-- Widget Area -->
-        </div>
-    </div>
-</div>
-
-
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 <script src="js/Feature9-ajax.js"></script>
-<!--<script src="js/likes.js"></script>-->
+<script src="js/likes.js"></script>
 
 </body>
 </html>

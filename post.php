@@ -91,7 +91,14 @@ $showDislikes=$geef->dislikesUitlezen();
     <link rel="stylesheet" href="css/style.css">
 
     <title>post</title>
+
+    <script>
+        function terug() {
+            window.history.back()
+        }
+    </script>
 </head>
+
 <body>
 
 <div id="TotalContainer">
@@ -111,7 +118,7 @@ $showDislikes=$geef->dislikesUitlezen();
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <a href="loggedin.php" class="btn btn-default">terug</a>
+                <a onclick="terug()"  class="btn btn-default">terug</a>
 
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -134,7 +141,10 @@ $showDislikes=$geef->dislikesUitlezen();
     <h1><?php echo $r['text'];?></h1>
 
     <img src="images/Posts/<?php echo $r['image'];?>" alt="foto post">
-    <p><?php echo "Geplaatst door: <b>".$r['eigenaar']. "</b> in <b>". $r['locatie']. "</b> : <b>".$verlopentijd. "</b>  geleden" ;?></p>
+    <p>
+
+        <?php echo'Geplaatst door:'.'<b> <a href="myprofile.php?user='.$r['eigenaar'].'"></b>'.$r['eigenaar'].' </a> in <b>'.$r['locatie'].'</b>: <b>'.$verlopentijd.'</b> geleden.' ;?>
+
     <div id="likes">
 
         <?php if (isset($showlikes)): ?>

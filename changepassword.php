@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("classes/User.class.php");
+include("classes/User.php");
 $user = $_SESSION['email'];
 if ($user) {
     if ($_POST['submit']) {

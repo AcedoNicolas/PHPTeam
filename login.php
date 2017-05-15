@@ -1,10 +1,8 @@
 <?php
 session_start();
-//include "classes/Login.class.php";
-//include_once("classes/User.class.php");
 
 spl_autoload_register(function ($class) {
-    include_once("classes/" . $class . ".class.php");
+    include_once("classes/" . $class . ".php");
 });
 
 if ((isset($_POST['BtnLogin']))&&(!empty($_POST))) {

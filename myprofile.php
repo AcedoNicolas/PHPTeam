@@ -33,10 +33,15 @@ $eigenaar = $_GET['user'];
     <?php
     echo $eigenaar;
 
+
     ?>
 
 </h1>
 <img src="<?php echo $_SESSION['avatar']; ?>" alt="avatar foto" id="avatar">
+
+
+
+
 <h2>Mijn posts</h2>
 
 <div class="row">

@@ -10,6 +10,7 @@ if ((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
         $login = new User();
         $login->Email = $_POST["email"];
         $login->Password = $_POST["password"];
+
         $login->Trylogin();
     } catch (Exception $e) {
         $error = $e->getMessage();
@@ -17,6 +18,7 @@ if ((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
 } elseif ((isset($_POST['BtnRegister']))&&(!empty($_POST))) {
     try {
         $user = new user();
+        $user->Avatar = "avatar.png";
         $fullnameErr = $emailErr = $passErr = "";
         if (empty($_POST["fullname"])) {
             $fullnameErr = "Full name is required";
@@ -45,6 +47,7 @@ if ((isset($_POST['BtnLogin']))&&(!empty($_POST))) {
     } catch (Exception $e) {
         $error= $e->getMessage();
     }
+
 }
 
 

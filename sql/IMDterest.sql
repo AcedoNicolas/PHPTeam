@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Machine: localhost
--- Gegenereerd op: 09 mei 2017 om 12:17
--- Serverversie: 5.6.21
--- PHP-versie: 5.6.3
+-- Host: 127.0.0.1
+-- Gegenereerd op: 15 mei 2017 om 21:58
+-- Serverversie: 10.1.21-MariaDB
+-- PHP-versie: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databank: `IMDterest`
+-- Database: `imdterest`
 --
 
 -- --------------------------------------------------------
@@ -26,134 +26,26 @@ SET time_zone = "+00:00";
 -- Tabelstructuur voor tabel `images`
 --
 
-CREATE TABLE IF NOT EXISTS `images` (
-`id` int(11) NOT NULL,
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
   `image` varchar(300) NOT NULL,
   `text` varchar(300) NOT NULL,
   `eigenaar` varchar(300) NOT NULL,
   `locatie` varchar(100) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `images`
 --
 
 INSERT INTO `images` (`id`, `image`, `text`, `eigenaar`, `locatie`, `time`) VALUES
-(20, 'kasteel1.jpg', 'mooi kasteel\r\n', 'an van steel', '', '2017-04-30 22:47:48'),
-(22, 'tools.jpg', 'gereedschap', 'an van steel', '', '2017-04-30 22:47:48'),
-(23, 'handen2.jpg', 'flat design handen', 'an van steel', '', '2017-04-30 22:47:48'),
-(24, 'duikboot.jpg', 'duikboot', 'an van steel', '', '2017-04-30 22:47:48'),
-(25, 'duikboot kopie.jpg', 'drfg', 'bert van hoorn', 'Kortenaken', '2017-04-30 22:47:48'),
-(26, 'shop2.jpg', 'flat design', 'bert van hoorn', 'Kortenaken', '2017-04-30 22:47:48'),
-(30, 'kasteel.jpg', 'jep', 'bert van hoorn', 'Kortenaken', '2017-04-30 22:54:59'),
-(31, 'planten.jpg', 'jo', 'bert van hoorn', 'Kortenaken', '2017-04-30 22:59:36'),
-(32, 'tools2.jpg', 'tools', 'an van steel', 'Kortenaken', '2017-04-30 23:08:19'),
-(33, 'doos.jpg', 'doos', 'an van steel', 'Kortenaken', '2017-04-30 23:08:54'),
-(35, 'zuilen.jpg', 'flat design', 'an van steel', 'Mitte', '2017-04-30 23:14:07'),
-(36, 'vissen.jpg', 'l:', 'an van steel', 'Mitte', '2017-04-30 23:15:07'),
-(37, 'zuilen1.jpg', 'zuil', 'joris', 'Nishishinjuku', '2017-04-30 23:17:11'),
-(38, 'acties facebook.jpg', 'flat design', 'joris', 'Nishishinjuku', '2017-05-01 00:03:09'),
-(39, 'stijl.jpg', 'flat design', 'Boris', 'Kortenaken', '2017-05-01 08:17:00'),
-(40, 'vector-e-commerce-icons-signs-flat-style-online-shopping-internet-36729556.jpg', 'leuke stijl ', 'nico', 'Kortenaken', '2017-05-01 11:48:44');
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `likes`
---
-
-CREATE TABLE IF NOT EXISTS `likes` (
-`id` int(11) NOT NULL,
-  `idUser` int(30) NOT NULL,
-  `idPost` int(30) NOT NULL,
-  `actie` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `likes`
---
-
-INSERT INTO `likes` (`id`, `idUser`, `idPost`, `actie`) VALUES
-(1, 2, 23, 1),
-(2, 2, 23, 0),
-(3, 2, 20, 1),
-(4, 2, 20, 1),
-(5, 2, 24, 1),
-(6, 2, 41, 0),
-(7, 2, 23, 1),
-(8, 2, 23, 1),
-(9, 2, 23, 0),
-(10, 2, 23, 1),
-(11, 2, 23, 1),
-(12, 2, 23, 0),
-(13, 2, 23, 1),
-(14, 2, 23, 1),
-(15, 2, 23, 1),
-(16, 2, 23, 1),
-(17, 2, 23, 1),
-(18, 2, 23, 1),
-(19, 2, 23, 1),
-(20, 2, 23, 0),
-(21, 2, 20, 1),
-(22, 2, 20, 1),
-(23, 2, 20, 1),
-(24, 2, 20, 1),
-(25, 2, 20, 1),
-(26, 2, 20, 1),
-(27, 2, 20, 0),
-(28, 2, 20, 1),
-(29, 2, 20, 1),
-(30, 2, 20, 1),
-(31, 2, 20, 1),
-(32, 2, 20, 1),
-(33, 2, 20, 1),
-(34, 2, 20, 1),
-(35, 2, 20, 1),
-(36, 2, 20, 1),
-(37, 2, 20, 1),
-(38, 2, 20, 1),
-(39, 2, 20, 0),
-(40, 2, 20, 1),
-(41, 2, 20, 0),
-(42, 2, 20, 1),
-(43, 2, 20, 1),
-(44, 2, 20, 1),
-(45, 2, 20, 0),
-(46, 2, 20, 1),
-(47, 2, 20, 0),
-(48, 2, 20, 0),
-(49, 2, 20, 1),
-(50, 2, 22, 0),
-(51, 2, 23, 0),
-(52, 2, 25, 0),
-(53, 2, 30, 1),
-(54, 2, 31, 1),
-(55, 2, 31, 1),
-(56, 2, 31, 0),
-(57, 2, 31, 1),
-(58, 2, 31, 0),
-(59, 2, 31, 1),
-(60, 2, 31, 0),
-(61, 2, 32, 0),
-(62, 2, 32, 0),
-(63, 2, 32, 1),
-(64, 2, 32, 1),
-(65, 2, 32, 1),
-(66, 2, 32, 0),
-(67, 2, 32, 1),
-(68, 2, 32, 1),
-(69, 2, 32, 1),
-(70, 2, 32, 0),
-(71, 2, 32, 1),
-(72, 3, 22, 1),
-(73, 3, 22, 1),
-(74, 3, 22, 1),
-(75, 3, 22, 0),
-(76, 3, 22, 0),
-(77, 3, 22, 1),
-(78, 3, 22, 1),
-(79, 3, 22, 0);
+(48, '94e5c8f8a38382c6750f26a2467ad670.jpg', 'Sketch', 'Bowdy Heyens', 'Willebroek', '2017-05-15 19:54:56'),
+(49, 'd39f1e4d3f635dd7b72ad73f4ae5f7de.jpg', 'Polygon', 'Sharon Bellens', 'Willebroek', '2017-05-15 19:55:43'),
+(50, 'download.png', 'Logo design', 'Sharon Bellens', 'Willebroek', '2017-05-15 19:56:15'),
+(51, 'design-header.jpg', 'Wallpaper', 'Sharon Bellens', 'Willebroek', '2017-05-15 19:56:31'),
+(52, 'images.png', 'Strak', 'Sharon Bellens', 'Willebroek', '2017-05-15 19:56:56'),
+(53, 'soundoftravel.png', 'Logo design', 'Sharon Bellens', 'Willebroek', '2017-05-15 19:57:42');
 
 -- --------------------------------------------------------
 
@@ -161,13 +53,13 @@ INSERT INTO `likes` (`id`, `idUser`, `idPost`, `actie`) VALUES
 -- Tabelstructuur voor tabel `tblactivities`
 --
 
-CREATE TABLE IF NOT EXISTS `tblactivities` (
-`id` int(11) NOT NULL,
+CREATE TABLE `tblactivities` (
+  `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   `idPost` int(11) NOT NULL,
   `comment_des` varchar(300) NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `tblactivities`
@@ -193,31 +85,27 @@ INSERT INTO `tblactivities` (`id`, `idUser`, `idPost`, `comment_des`, `time`) VA
 (33, 2, 4, 'ik kan hem niet verwijderen ?', '2017-04-30 11:47:02'),
 (34, 2, 8, 'leuk', '2017-04-30 14:01:06'),
 (35, 2, 10, 'cool !', '2017-04-30 15:20:58'),
-(36, 11, 25, 'wat is dit ?\r\n', '2017-05-01 10:19:55'),
-(37, 13, 24, 'cool', '2017-05-02 09:45:38'),
-(38, 2, 20, 'veel likes !\r\n', '2017-05-08 14:10:11'),
-(39, 3, 22, 'cool', '2017-05-09 09:25:14'),
-(40, 3, 22, 'jolo', '2017-05-09 09:42:26');
+(36, 14, 24, 'mooi', '2017-05-14 13:05:15');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Users`
+-- Tabelstructuur voor tabel `users`
 --
 
-CREATE TABLE IF NOT EXISTS `Users` (
-`ID` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL,
   `fullname` varchar(300) NOT NULL,
   `email` varchar(300) NOT NULL,
   `password` varchar(300) NOT NULL,
-  `avatar` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://trial26.github.io/Project-2/img/avatar-empty.jpg'
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  `avatar` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `Users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `Users` (`ID`, `fullname`, `email`, `password`, `avatar`) VALUES
+INSERT INTO `users` (`ID`, `fullname`, `email`, `password`, `avatar`) VALUES
 (1, 'joris', 'joris@joris.be', '$2y$12$ez91rE7RI./Q251tQZf.muxWhbe1TLHRq.fa3wcDjcu/8IfTzWPyq', 'https://s3.amazonaws.com/uifaces/faces/twitter/whale/128.jpg'),
 (2, 'bert van hoorn', 'bert@bert.be', '$2y$12$1jp8/VMXHNVtPaNTF0AIkOf53YcOgFCjkc0kcb2FrF93qdDU.Q3EO', 'https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg'),
 (3, 'jojo', 'jojo@jojo.com', '$2y$12$iol.kqdzkotYfasmn1E5xe.8fBIOY0QtUuOl.ZYZd85P.D0DCr/5C', 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg'),
@@ -226,7 +114,11 @@ INSERT INTO `Users` (`ID`, `fullname`, `email`, `password`, `avatar`) VALUES
 (6, 'bertio', 'bert@bert.be', '$2y$12$T5la/7t3DrQGvToiT4KLXOIqdqqoKxsXtFLDFDQSdCdNQyG2WkkxG', 'https://s3.amazonaws.com/uifaces/faces/twitter/enda/128.jpg'),
 (11, 'Boris', 'boris@boris.be', '$2y$12$T5la/7t3DrQGvToiT4KLXOIqdqqoKxsXtFLDFDQSdCdNQyG2WkkxG', 'https://s3.amazonaws.com/uifaces/faces/twitter/andyvitale/128.jpg'),
 (12, 'an van steel', 'an@an.be', '$2y$12$v5BTVXf.yR.xh.neCvXzjurOL4641Tb5.Gkw9zOQ8bVv95JuuLF9G', 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg'),
-(13, 'nico', 'nico@nico.be', '$2y$12$3VWz1w8ZE4YISFtrzIOy0u4sfbjwVGZYjfVezUSLj39rjLKdfIbuO', 'https://trial26.github.io/Project-2/img/avatar-empty.jpg');
+(13, 'John', 'john@john.be', '$2y$12$AMJm656X9A6/VxM0kgesXe4Yb6qLPOkrf5JxBq31RWF2xJeRCYFse', ''),
+(14, 'Bowdy Heyens', 'bowdy@hotmail.be', '$2y$12$CYUBAmgsV3zeoLpUy0Q4P.6uFC/vlbA1i5o7dfpIxKorGwDr6OaKS', ''),
+(15, 'Albert Bellens', 'albertbellens@hotmail.be', '$2y$12$l4eYrHDSacJew4I.3WPi3.imZhrNLnW3ZgqaHragpYTsHzTkgdDj.', ''),
+(16, 'Sharon Bellens', 'sharonbellens@hotmail.be', '$2y$12$JvqVd5bVLWl4hAXrCK07COT0X9GvXSfyW80VqjYWXDLkVKZCwFWk.', 'avatar.png'),
+(17, 'Bowdy Heyens', 'bowdy@hotmail.be', '$2y$12$KOVCU0yhzzI6BWNhKOqh0O/IYpryNxgdgvLtrWQ7GJUgOi2/gj5N6', 'avatar.png');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -236,25 +128,19 @@ INSERT INTO `Users` (`ID`, `fullname`, `email`, `password`, `avatar`) VALUES
 -- Indexen voor tabel `images`
 --
 ALTER TABLE `images`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexen voor tabel `likes`
---
-ALTER TABLE `likes`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `tblactivities`
 --
 ALTER TABLE `tblactivities`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `Users`
+-- Indexen voor tabel `users`
 --
-ALTER TABLE `Users`
- ADD PRIMARY KEY (`ID`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -264,22 +150,17 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT voor een tabel `images`
 --
 ALTER TABLE `images`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
---
--- AUTO_INCREMENT voor een tabel `likes`
---
-ALTER TABLE `likes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT voor een tabel `tblactivities`
 --
 ALTER TABLE `tblactivities`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
--- AUTO_INCREMENT voor een tabel `Users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
-ALTER TABLE `Users`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

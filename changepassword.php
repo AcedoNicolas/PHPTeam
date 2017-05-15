@@ -35,7 +35,7 @@ if (!empty($_POST)) {
         <input id="fullname" name="fullname" type="text" placeholder="Full Name"
                value="<?php echo $_SESSION['fullname'] ?>"/>
     </fieldset>
-    
+
 
     <fieldset>
         <label>Password</label>

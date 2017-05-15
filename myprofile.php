@@ -37,7 +37,16 @@ $eigenaar = $_GET['user'];
     ?>
 
 </h1>
-<img src="<?php echo $_SESSION['avatar']; ?>" alt="avatar foto" id="avatar">
+<?php
+$conn = Db::getInstance();
+$records = $conn->prepare('SELECT * FROM users where eigenaar = :eigenaar');
+$records->bindParam(':eigenaar',$eigenaar);
+$records->execute();
+while ($row = $records->fetch(PDO::FETCH_ASSOC)): ?>
+<img class="projectImg" src="<?php echo "images/users/".$row['avatar']; ?>" alt="titre">
+<?php endwhile; ?>
+
+
 
 
 

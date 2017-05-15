@@ -108,7 +108,7 @@ if ((isset($_POST['upload']))&&(!empty($_POST))) {
       </form>
 
       <ul class="nav navbar-nav navbar-right">
-          <li> <img src="<?php echo $_SESSION['avatar']; ?>" alt="avatar foto" id="avatar"></li>
+          <li>  <img src="images/users/<?php echo $_SESSION['avatar'];?>" alt="foto post" id="avatar"></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn account <span class="caret"></span></a>
           <ul class="dropdown-menu">

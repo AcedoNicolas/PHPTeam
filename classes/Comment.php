@@ -46,8 +46,6 @@ class Comment
     public function SavePost()
     {
         //connectie maken (PDO)
-        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-       // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
         $conn = Db::getInstance();
         //query
         $statement = $conn->prepare("INSERT INTO tblactivities (comment_des, idUser, idPost) VALUES (:Text, :User, :Post)");
@@ -61,8 +59,6 @@ class Comment
     public function GetRecentActivities()
     {
 
-            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-           // $conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM `tblactivities` WHERE idPost = $this->m_iidPost ORDER BY `id` DESC ");
         $statement->execute();
@@ -74,8 +70,6 @@ class Comment
 
     public function GegevensOphalen($id)
     {
-        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT ID,fullname, avatar FROM `Users` WHERE id = $id");
         $statement->execute();
@@ -88,7 +82,6 @@ class Comment
 
     public function likeDoorgeven($klik)
     {
-        //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM `likes` WHERE idUser = :User AND idPost = :Post");
         $statement->bindValue(':User', $this->m_iidUser);
@@ -132,9 +125,7 @@ class Comment
     }
     public function likesUitlezen()
     {
-        //$idPost = $_GET['nr'];
-            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
+
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost = $this->m_iidPost AND actie = 1");
         $statement->execute();
@@ -144,9 +135,6 @@ class Comment
     }
     public function dislikesUitlezen()
     {
-        //$idPost = $_GET['nr'];
-            //$conn = new PDO("mysql:host=localhost;dbname=IMDterest", "root", "");
-            //$conn = new PDO("mysql:host=localhost;dbname=jorisd1q_IMDterest", "jorisd1q_joDeis", "jo-ris-D-22L");
             $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM `likes` WHERE idPost =$this->m_iidPost AND actie = 0");
         $statement->execute();
